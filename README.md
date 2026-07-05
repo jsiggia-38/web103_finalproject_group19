@@ -64,7 +64,7 @@ View information about college football teams, including team name, division, ca
 
 Team captains and coaches can save promising players to their personal scout list while keeping track of scouting progress through statuses such as Interested, Watching, Contacted, Tryout Invited, and Added to Team.
 
-### Search, Filter, and Sort Players
+### Search, Filter, and Sort Players(Custom 1)
 Search for players and quickly filter them by:
 Playing Position
 Class Year
@@ -75,7 +75,7 @@ Goals
 Assists
 Skill Level
 
-### Tryout Invitation Modal
+### Tryout Invitation Modal (Custom 2)
 Captains and coaches can invite players to upcoming tryouts using a popup modal without leaving the current page. Invitations include the tryout date, location, and a personalized message.
 
 ### Player Statistics
@@ -103,7 +103,7 @@ The application is fully responsive and optimized for desktop, tablet, and mobil
 ### Database Reset
 The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
 
-### AI Assistant
+### AI Assistant(Custom 3)
 An AI assistant that helps the user accomplish their tasks.  
 
 
