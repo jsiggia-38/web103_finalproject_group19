@@ -2,7 +2,7 @@
 
 CodePath WEB103 Final Project
 
-Designed and developed by: Lukman Adeyemi and Joseph Siggia
+Designed and developed by: Lukman Adeyemi, Joseph Siggia and Maria Khan
 
 🔗 Link to deployed app:
 
