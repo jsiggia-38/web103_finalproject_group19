@@ -1,10 +1,26 @@
 # Wireframes
 
-Reference the Creating an Entity Relationship Diagram final project guide in the course portal for more information about how to complete this deliverable.
 
 ## List of Pages
+The ⭐ indicates the pages that have been wireframed.
 
-[👉🏾👉🏾👉🏾 List the pages you expect to have in your app, with a ⭐ next to pages you have wireframed]
+1. ⭐ Home Page
+
+2. ⭐ Player Search (Browse Players)
+
+3. ⭐ Player Profile
+
+4. ⭐ Scout List
+
+5. Team Profiles
+
+6. Create/Edit Player Profile
+
+7. Login / Sign Up
+
+8. Dashboard
+
+9. AI Assistant
 
 ## Wireframe 1: [page title]
 
