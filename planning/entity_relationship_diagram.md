@@ -2,17 +2,23 @@
 
 Our College Football Scout Helper application uses the following six database tables:
 
-1. *Users:* stores account information for everyone using the application, including student players, coaches, team captains, and club organizers.
+1. Users:
+    Stores account information for everyone using the application, including student players, coaches, team captains, and club organizers.
 
-2. Teams: stores information about college football teams, including team name, captain, division, and practice information.
+2. Teams:
+   Stores information about college football teams, including team name, captain, division, and practice information.
 
-3. Players: stores football-specific profile information for student athletes.
+3. Players:
+   Stores football-specific profile information for student athletes.
 
-4. Player Statistics: stores player performance statistics such as goals, assists, clean sheets, and games played.
+4. Player Statistics:
+   Stores player performance statistics such as goals, assists, clean sheets, and games played.
 
-5. Scout List: stores scouting records, allowing coaches to keep track of players they are interested in recruiting.
+5. Scout List:
+   Stores scouting records, allowing coaches to keep track of players they are interested in recruiting.
 
-6. Tryout Invitations: stores invitations sent by coaches to players for upcoming tryouts.
+6. Tryout Invitations:
+   Stores invitations sent by coaches to players for upcoming tryouts.
 
 
 ## Entity Relationship Diagram
