@@ -17,7 +17,7 @@ The ⭐ indicates the pages that have been wireframed.
 
 ## Wireframe 1: [Home Page]
 
-[👉🏾👉🏾👉🏾 include wireframe 1]
+[👉🏾👉🏾👉🏾 include wireframe 1] https://stitch.withgoogle.com/preview/3814869557478901140?node-id=a10b82880bd64ef7bc92a4ab201d9e96
 
 ## Wireframe 2: [Players Page]
 
