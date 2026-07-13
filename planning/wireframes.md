@@ -8,7 +8,7 @@ The ⭐ indicates the pages that have been wireframed.
 - ⭐ Players Page
 - ⭐ Player Profile Page
 - ⭐ Scout List Page
-- ⭐ Login / Sign Up Page
+- Login / Sign Up Page
 - Teams Page
 - Team Details Page
 - Create/Edit Player Profile Page
