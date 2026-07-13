@@ -32,50 +32,6 @@ The ⭐ indicates the pages that have been wireframed.
 
 
 ## Wireframe 4: [Scout List Page]
+<img width="1402" height="1122" alt="scout_List" src="https://github.com/user-attachments/assets/9ad9b018-b067-4ab2-813a-d0c6d9d2ad98" />
 
----------------------------------------------------------------------------------------------------------
-| ⚽ College Football Scout Helper                                   Login | Sign Up                    |
----------------------------------------------------------------------------------------------------------
-| Home | Players | Teams | Scout List | AI Assistant                                                  |
----------------------------------------------------------------------------------------------------------
-
-                                      MY SCOUT LIST
-
-Track promising players and manage your recruitment progress.
-
----------------------------------------------------------------------------------------------------------
-| Search Player [________________________]  Status [All Statuses ▼]  Team [All Teams ▼]  [Clear Filters] |
----------------------------------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------------------------------
-| Interested: 4 | Watching: 3 | Contacted: 2 | Tryout Invited: 2 | Added to Team: 1                     |
----------------------------------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------------------------------
-| PLAYER                  | FOOTBALL DETAILS       | STATISTICS          | SCOUTING STATUS               |
----------------------------------------------------------------------------------------------------------
-| [Player Photo]          | Position: Midfielder   | Goals: 8            | Status: [Watching ▼]           |
-| Daniel Smith            | Class Year: Senior     | Assists: 10         | Date Added: Sept. 15           |
-| Campus United           | Skill: Advanced        | Games: 15           |                                |
-| Available               | Preferred Foot: Right  | Clean Sheets: 2     | Notes:                         |
-|                         |                         |                     | Strong passing and awareness.  |
-| [View Profile]          |                         |                     | [Edit Notes]                   |
-|                         |                         |                     | [Invite to Tryout]             |
-|                         |                         |                     | [Remove]                       |
----------------------------------------------------------------------------------------------------------
-| [Player Photo]          | Position: Forward      | Goals: 12           | Status: [Interested ▼]         |
-| Kevin Brown             | Class Year: Junior     | Assists: 4          | Date Added: Sept. 18           |
-| Northside FC            | Skill: Intermediate    | Games: 13           |                                |
-| Available               | Preferred Foot: Left   | Clean Sheets: 0     | Notes:                         |
-|                         |                         |                     | Fast player with good control. |
-| [View Profile]          |                         |                     | [Edit Notes]                   |
-|                         |                         |                     | [Invite to Tryout]             |
-|                         |                         |                     | [Remove]                       |
----------------------------------------------------------------------------------------------------------
-
-                                      [Previous] 1 2 3 [Next]
-
----------------------------------------------------------------------------------------------------------
-| Footer: College Football Scout Helper | Privacy | Contact | Social Icons                              |
----------------------------------------------------------------------------------------------------------
 
