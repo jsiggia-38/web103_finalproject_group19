@@ -16,8 +16,8 @@ The ⭐ indicates the pages that have been wireframed.
 - Tryout Invitations Page
 
 ## Wireframe 1: [Home Page]
+<img width="597" height="732" alt="image" src="https://github.com/user-attachments/assets/8cb69854-eb8f-4092-abc5-0055295d0f57" />
 
-[👉🏾👉🏾👉🏾 include wireframe 1] https://stitch.withgoogle.com/preview/3814869557478901140?node-id=a10b82880bd64ef7bc92a4ab201d9e96
 
 ## Wireframe 2: [Players Page]
 
