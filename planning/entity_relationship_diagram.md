@@ -4,14 +4,17 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 
 ## Create the List of Tables
 
-[👉🏾👉🏾👉🏾 List each table in your diagram]
+Our College Football Scout Helper application uses the following six database tables:
+
+1. Users
+2. Teams
+3. Players
+4. Player Statistics
+5. Scout List
+6. Tryout Invitations
 
 ## Add the Entity Relationship Diagram
 
-[👉🏾👉🏾👉🏾 Include an image or images of the diagram below. You may also wish to use the following markdown syntax to outline each table, as per your preference.]
+The diagram below illustrates the database structure for the College Football Scout Helper application.
 
-| Column Name | Type | Description |
-|-------------|------|-------------|
-| id | integer | primary key |
-| name | text | name of the shoe model |
-| ... | ... | ... |
+![Entity Relationship Diagram](entity_relationship_diagram.png)
