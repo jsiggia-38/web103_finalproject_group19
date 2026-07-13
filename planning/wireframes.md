@@ -4,23 +4,16 @@
 ## List of Pages
 The ⭐ indicates the pages that have been wireframed.
 
-1. ⭐ Home Page
-
-2. ⭐ Player Search (Browse Players)
-
-3. ⭐ Player Profile
-
-4. ⭐ Scout List
-
-5. Team Profiles
-
-6. Create/Edit Player Profile
-
-7. Login / Sign Up
-
-8. Dashboard
-
-9. AI Assistant
+- ⭐ Home Page
+- ⭐ Players Page
+- ⭐ Player Profile Page
+- ⭐ Scout List Page
+- ⭐ Login / Sign Up Page
+- Teams Page
+- Team Details Page
+- Create/Edit Player Profile Page
+- Create/Edit Team Page
+- Tryout Invitations Page
 
 ## Wireframe 1: [page title]
 
