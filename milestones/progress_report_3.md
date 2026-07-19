@@ -38,5 +38,7 @@ List each issue you completed this unit and the main file or folder where that w
 ## Features Completed This Unit
 List each feature you completed and checked off in readme.md this unit, one per line:
 - Example: Search events by category
-- homepage
-- players page
+- set up project and installed necessary dependencies
+- set up and connected to a postgreSQL database
+- homepage(in progress)
+- players page(in progress)
