@@ -30,4 +30,4 @@ AI assistant. If we are unable to complete it, we will change it to a stretch fe
 
 ### 5. What additional support will you need in upcoming units as you continue to work on your final project?
 
-[👉🏾👉🏾👉🏾 your answer here]
+We will require support from TFs along the way to oversee our features.
