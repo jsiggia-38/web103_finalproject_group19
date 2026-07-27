@@ -10,11 +10,13 @@ Designed and developed by: Lukman Adeyemi, Joseph Siggia and Maria Khan
 An app that allows student football players to showcase their skills to scouts.
 
 
-### Description and Purpose
+### ✅ Description and Purpose
 
 College Football Scout Helper is a full-stack web application that helps college football clubs, intramural teams, and student players connect through a centralized scouting platform.
 
-Student players can create football profiles highlighting their playing position, preferred foot, skill level, availability, and performance statistics such as goals, assists, clean sheets, and games played. Team captains and coaches can browse player profiles, search for players based on specific criteria, maintain a scouting list, and invite promising players to team tryouts.
+Student players verify their identity before creating a profile. The system then retrieves and automatically populates verified football information such as playing position, preferred foot, skill level, and performance statistics from a simulated player registry. Players can complete additional profile information such as their biography, profile image, and availability.
+
+Team captains and coaches can browse player profiles, search for players based on specific criteria, maintain a scouting list, and invite promising players to team tryouts.
 
 The goal of this application is to simplify player recruitment within a college environment by giving student athletes an opportunity to showcase their abilities while providing campus football teams with an efficient way to discover and recruit new talent.
 
