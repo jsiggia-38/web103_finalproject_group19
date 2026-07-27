@@ -15,10 +15,15 @@ A university football club administrator who manages teams, player registrations
 ## Draft User Stories
 
 Student Player
-As a student player, I want to create a football profile so that coaches and team captains can discover me.
-As a student player, I want to update my football statistics so that my profile reflects my latest performance.
-As a student player, I want to edit my availability so that teams know when I am available for practices and matches.
-As a student player, I want to view my scouting status so that I know whether a team is interested in recruiting me.
+### Student Player
+
+- As a student player, I want to verify my identity using my name and date of birth so that my football information can be retrieved from the demo player registry.
+
+- As a student player, I want my verified playing position, preferred foot, skill level, and performance statistics to be automatically added to my profile so that recruiters can trust the information displayed.
+
+- As a student player, I want to complete my biography, profile image, and availability after verification so that coaches can learn more about me.
+
+- As a student player, I want to view my scouting status so that I know whether a team is interested in recruiting me.
 
 Team Captain / Coach
 As a team captain/coach, I want to browse all registered players so that I can identify potential recruits.
