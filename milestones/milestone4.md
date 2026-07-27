@@ -15,14 +15,15 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
 
 ### 1. What went well during this unit?
 
-
+We had to update our project with a simulated third-party player records table used to verify a student player before a football profile is created.
 
 ### 2. What were some challenges your group faced in this unit?
 
-
+Re-working the project with this new feature (Player Information Verification)
 
 ### Did you finish all of your tasks in your sprint plan for this week? If you did not finish all of the planned tasks, how would you prioritize the remaining tasks on your list?
 
+We didn't finish all tasks. But we are able to achieve an updated project plan and have a clear understanding of the project workflow. We are confident that we will complete the pending task in due course.
 
 ### Which features and user stories would you consider “at risk”? How will you change your plan if those items remain “at risk”?
 
