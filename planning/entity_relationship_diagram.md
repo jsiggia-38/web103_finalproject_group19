@@ -4,7 +4,7 @@ Our College Football Scout Helper application uses the following seven database 
 
 1. Users
 2. Teams
-3. Player_Verification_Records
+3. Player_Verification_Records (New)
 4. Players
 5. Player Statistics
 6. Scout List
