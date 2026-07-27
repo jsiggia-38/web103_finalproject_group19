@@ -8,6 +8,12 @@ List each issue you completed this unit and the main file or folder where that w
 - Updated User Story to include player information verification - planning/user_stories.md
 - Updated Description and Purpose - README.md
 - Updated our ERD Diagram, Relationship and Tables from 6 to 7  -  planning/entity_relationship_diagram.md
+- Created Validation logic for email, password and role -     server/utils/validation.js
+- Created Validation Logic for name -     server/utils/normalizeName.js
+- Routes and Pages -     client/src/App.jsx
+- Error handler for Routes -     server/middleware/errorHandler.js
+- Error handler for Roles -     server/middleware/roleMiddleware.js
+
   
 
 ## Features Completed This Unit
