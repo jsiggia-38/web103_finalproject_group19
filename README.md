@@ -47,6 +47,13 @@ CORS
 
 ## Features
 
+### ✅ Database Reset
+The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
+
+
+<img width="1920" height="1020" alt="Database" src="https://github.com/user-attachments/assets/38aa28fb-a212-442f-a259-2eba8a590240" />
+
+
 ### Student Player Profiles
 
 Students can create, edit, update, and delete football profiles containing their personal information, playing position, preferred foot, skill level, availability, goals, assists, clean sheets, and games played.
@@ -66,7 +73,7 @@ View information about college football teams, including team name, division, ca
 
 Team captains and coaches can save promising players to their personal scout list while keeping track of scouting progress through statuses such as Interested, Watching, Contacted, Tryout Invited, and Added to Team.
 
-## ✅ Player Identity and Profile Verification (Custom 1)
+## Player Identity and Profile Verification (Custom 1)
 
 Student players must verify their identity using their first name, last name, and date of birth before creating a football profile.
 
@@ -122,12 +129,6 @@ Each player has a dedicated profile page displaying their complete football prof
 
 ### Responsive User Interface
 The application is fully responsive and optimized for desktop, tablet, and mobile devices.
-
-### ✅ Database Reset
-The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
-
-
-<img width="1920" height="1020" alt="Database" src="https://github.com/user-attachments/assets/38aa28fb-a212-442f-a259-2eba8a590240" />
 
 
 ### AI Assistant(Custom 4)
