@@ -19,7 +19,7 @@ We had to update our project with a simulated third-party player records table u
 
 ### 2. What were some challenges your group faced in this unit?
 
-Re-working the project with this new feature (Player Information Verification)
+Re-working the project with this new feature (Player Information Verification) and how it would serve it purpose between user roles (Student Player, Coach, Club Organizer)
 
 ### Did you finish all of your tasks in your sprint plan for this week? If you did not finish all of the planned tasks, how would you prioritize the remaining tasks on your list?
 
