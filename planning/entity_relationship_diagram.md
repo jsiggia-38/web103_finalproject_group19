@@ -1,13 +1,14 @@
 ## List of Tables
 
-Our College Football Scout Helper application uses the following six database tables:
+Our College Football Scout Helper application uses the following seven database tables:
 
 1. Users
 2. Teams
-3. Players
-4. Player Statistics
-5. Scout List
-6. Tryout Invitations
+3. Player_Verification_Records (New Table)
+4. Players
+5. Player Statistics
+6. Scout List
+7. Tryout Invitations
 
 ## Entity Relationship Diagram
 
@@ -59,6 +60,9 @@ Stores each player's football profile.
 | player_id | integer | Primary Key |
 | user_id | integer | Foreign Key → Users |
 | team_id | integer | Foreign Key → Teams |
+| verification_id | integer | Foreign Key → Player Verification Records |
+| is_verified | boolean | Indicates whether the player profile was verified |
+| verified_at | timestamp | Date and time the player was verified |
 | profile_image | varchar | Player photo |
 | biography | text | Player biography |
 | primary_position | varchar | Main playing position |
@@ -117,25 +121,55 @@ Stores invitations sent from coaches to players.
 | invitation_status | varchar | Pending, Accepted, Declined |
 | created_at | timestamp | Invitation creation date |
 
+
+### Table 7 - Player Verification Records
+
+Stores simulated third-party player records used to verify a student player before a football profile is created.
+
+| Column Name | Type | Description |
+|-------------|------|-------------|
+| verification_id | integer | Primary Key |
+| first_name | varchar | Verified player first name |
+| last_name | varchar | Verified player last name |
+| date_of_birth | date | Date of birth used for identity matching |
+| primary_position | varchar | Verified primary playing position |
+| secondary_position | varchar | Verified secondary playing position |
+| preferred_foot | varchar | Verified preferred foot |
+| skill_level | varchar | Verified player skill level |
+| class_year | varchar | Verified college class year |
+| goals | integer | Verified number of goals |
+| assists | integer | Verified number of assists |
+| clean_sheets | integer | Verified number of clean sheets |
+| games_played | integer | Verified number of games played |
+| verification_source | varchar | Source of the demo verification record |
+| verification_status | varchar | Verification state, such as Verified |
+| created_at | timestamp | Date the verification record was created |
+
+
 ## Relationships
 
 The College Football Scout Helper database uses the following relationships:
 
 ### One-to-One (1:1)
 
+- One User can have zero or one Player profile.
+- One Player Verification Record can be linked to zero or one Player profile.
 - One Player has one Player Statistics record.
 
 ### One-to-Many (1:N)
 
 - One Team has many Players.
 - One Coach can create many Scout List records.
+- One Player can appear in many Scout List records.
+- One Team can have many Scout List records.
 - One Coach can send many Tryout Invitations.
-- One Team can send many Tryout Invitations.
+- One Player can receive many Tryout Invitations.
+- One Team can send or host many Tryout Invitations.
 
 ### Many-to-Many (M:N)
 
 - Coaches can scout many Players.
-- Players can appear in many Coaches' Scout Lists.
+- Players can be scouted by many Coaches.
 
 This many-to-many relationship is implemented through the Scout List table.
 

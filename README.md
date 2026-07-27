@@ -10,11 +10,13 @@ Designed and developed by: Lukman Adeyemi, Joseph Siggia and Maria Khan
 An app that allows student football players to showcase their skills to scouts.
 
 
-### Description and Purpose
+### ✅ Description and Purpose
 
 College Football Scout Helper is a full-stack web application that helps college football clubs, intramural teams, and student players connect through a centralized scouting platform.
 
-Student players can create football profiles highlighting their playing position, preferred foot, skill level, availability, and performance statistics such as goals, assists, clean sheets, and games played. Team captains and coaches can browse player profiles, search for players based on specific criteria, maintain a scouting list, and invite promising players to team tryouts.
+Student players verify their identity before creating a profile. The system then retrieves and automatically populates verified football information such as playing position, preferred foot, skill level, and performance statistics from a simulated player registry. Players can complete additional profile information such as their biography, profile image, and availability.
+
+Team captains and coaches can browse player profiles, search for players based on specific criteria, maintain a scouting list, and invite promising players to team tryouts.
 
 The goal of this application is to simplify player recruitment within a college environment by giving student athletes an opportunity to showcase their abilities while providing campus football teams with an efficient way to discover and recruit new talent.
 
@@ -64,7 +66,28 @@ View information about college football teams, including team name, division, ca
 
 Team captains and coaches can save promising players to their personal scout list while keeping track of scouting progress through statuses such as Interested, Watching, Contacted, Tryout Invited, and Added to Team.
 
-### Search, Filter, and Sort Players(Custom 1)
+## ✅ Player Identity and Profile Verification (Custom 1)
+
+Student players must verify their identity using their first name, last name, and date of birth before creating a football profile.
+
+The application checks the submitted details against a pre-seeded demo player registry. When a match is found, the system automatically populates verified football information, including:
+
+- Primary and secondary playing positions
+- Preferred foot
+- Skill level
+- Class year
+- Goals
+- Assists
+- Clean sheets
+- Games played
+
+Verified football fields are read-only and cannot be manually changed by the player. Players can still add personal information such as their profile image, biography, and availability.
+
+This feature uses simulated verification records for demonstration purposes and is not connected to an official sports governing body.
+
+[gif goes here]
+
+### Search, Filter, and Sort Players(Custom 2)
 Search for players and quickly filter them by:
 Playing Position
 Class Year
@@ -75,7 +98,7 @@ Goals
 Assists
 Skill Level
 
-### Tryout Invitation Modal (Custom 2)
+### Tryout Invitation Modal (Custom 3)
 Captains and coaches can invite players to upcoming tryouts using a popup modal without leaving the current page. Invitations include the tryout date, location, and a personalized message.
 
 ### Player Statistics
@@ -100,10 +123,14 @@ Each player has a dedicated profile page displaying their complete football prof
 ### Responsive User Interface
 The application is fully responsive and optimized for desktop, tablet, and mobile devices.
 
-### Database Reset
+### ✅ Database Reset
 The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
 
-### AI Assistant(Custom 3)
+
+<img width="1920" height="1020" alt="Database" src="https://github.com/user-attachments/assets/38aa28fb-a212-442f-a259-2eba8a590240" />
+
+
+### AI Assistant(Custom 4)
 An AI assistant that helps the user accomplish their tasks.  
 
 
