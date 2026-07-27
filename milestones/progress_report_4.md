@@ -9,9 +9,9 @@ List each issue you completed this unit and the main file or folder where that w
 - Updated User Story to include player information verification - planning/user_stories.md
 - Updated Description and Purpose - README.md
 - Updated our ERD Diagram, Relationship and Tables from 6 to 7  -  planning/entity_relationship_diagram.md
-- 
+  
 
 ## Features Completed This Unit
 List each feature you completed and checked off in readme.md this unit, one per line:
 - Example: Search events by category
-- 
+- Database 
