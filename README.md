@@ -126,6 +126,10 @@ The application is fully responsive and optimized for desktop, tablet, and mobil
 ### ✅ Database Reset
 The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
 
+
+<img width="1920" height="1020" alt="Database" src="https://github.com/user-attachments/assets/38aa28fb-a212-442f-a259-2eba8a590240" />
+
+
 ### AI Assistant(Custom 4)
 An AI assistant that helps the user accomplish their tasks.  
 
