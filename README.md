@@ -64,7 +64,28 @@ View information about college football teams, including team name, division, ca
 
 Team captains and coaches can save promising players to their personal scout list while keeping track of scouting progress through statuses such as Interested, Watching, Contacted, Tryout Invited, and Added to Team.
 
-### Search, Filter, and Sort Players(Custom 1)
+## ✅ Player Identity and Profile Verification (Custom 1)
+
+Student players must verify their identity using their first name, last name, and date of birth before creating a football profile.
+
+The application checks the submitted details against a pre-seeded demo player registry. When a match is found, the system automatically populates verified football information, including:
+
+- Primary and secondary playing positions
+- Preferred foot
+- Skill level
+- Class year
+- Goals
+- Assists
+- Clean sheets
+- Games played
+
+Verified football fields are read-only and cannot be manually changed by the player. Players can still add personal information such as their profile image, biography, and availability.
+
+This feature uses simulated verification records for demonstration purposes and is not connected to an official sports governing body.
+
+[gif goes here]
+
+### Search, Filter, and Sort Players(Custom 2)
 Search for players and quickly filter them by:
 Playing Position
 Class Year
@@ -75,7 +96,7 @@ Goals
 Assists
 Skill Level
 
-### Tryout Invitation Modal (Custom 2)
+### Tryout Invitation Modal (Custom 3)
 Captains and coaches can invite players to upcoming tryouts using a popup modal without leaving the current page. Invitations include the tryout date, location, and a personalized message.
 
 ### Player Statistics
@@ -100,10 +121,10 @@ Each player has a dedicated profile page displaying their complete football prof
 ### Responsive User Interface
 The application is fully responsive and optimized for desktop, tablet, and mobile devices.
 
-### Database Reset
+### ✅ Database Reset
 The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
 
-### AI Assistant(Custom 3)
+### AI Assistant(Custom 4)
 An AI assistant that helps the user accomplish their tasks.  
 
 
