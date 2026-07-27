@@ -18,6 +18,7 @@ const dropAllTables = async () => {
     DROP TABLE IF EXISTS scout_list;
     DROP TABLE IF EXISTS player_statistics;
     DROP TABLE IF EXISTS players;
+    DROP TABLE IF EXISTS player_verification_records;
     DROP TABLE IF EXISTS teams;
     DROP TABLE IF EXISTS users;
   `
@@ -72,8 +73,10 @@ const createPlayersTable = async () => {
   const query = `
     CREATE TABLE IF NOT EXISTS players (
       player_id SERIAL PRIMARY KEY,
-      user_id INTEGER REFERENCES users(user_id),
+      user_id INTEGER UNIQUE REFERENCES users(user_id) ON DELETE CASCADE,
       team_id INTEGER REFERENCES teams(team_id),
+      verification_id INTEGER UNIQUE
+        REFERENCES player_verification_records(verification_id),
       profile_image VARCHAR(255),
       biography TEXT,
       primary_position VARCHAR(50),
@@ -82,6 +85,8 @@ const createPlayersTable = async () => {
       class_year VARCHAR(25),
       skill_level VARCHAR(25),
       availability VARCHAR(100),
+      is_verified BOOLEAN DEFAULT FALSE,
+      verified_at TIMESTAMP,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
@@ -146,12 +151,107 @@ const createTryoutInvitationsTable = async () => {
   console.log('✅ Tryout Invitations table created')
 }
 
+const createPlayerVerificationRecordsTable = async () => {
+  const query = `
+    CREATE TABLE IF NOT EXISTS player_verification_records (
+      verification_id SERIAL PRIMARY KEY,
+      first_name VARCHAR(50) NOT NULL,
+      last_name VARCHAR(50) NOT NULL,
+      date_of_birth DATE NOT NULL,
+      primary_position VARCHAR(50) NOT NULL,
+      secondary_position VARCHAR(50),
+      preferred_foot VARCHAR(20),
+      skill_level VARCHAR(25),
+      class_year VARCHAR(25),
+      goals INTEGER DEFAULT 0,
+      assists INTEGER DEFAULT 0,
+      clean_sheets INTEGER DEFAULT 0,
+      games_played INTEGER DEFAULT 0,
+      verification_source VARCHAR(100) DEFAULT 'Demo College Sports Registry',
+      verification_status VARCHAR(25) DEFAULT 'Verified',
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+      UNIQUE(first_name, last_name, date_of_birth)
+    );
+  `
+
+  await pool.query(query)
+  console.log('✅ Player Verification Records table created')
+}
+
+const seedPlayerVerificationRecords = async () => {
+  const query = `
+    INSERT INTO player_verification_records (
+      first_name,
+      last_name,
+      date_of_birth,
+      primary_position,
+      secondary_position,
+      preferred_foot,
+      skill_level,
+      class_year,
+      goals,
+      assists,
+      clean_sheets,
+      games_played
+    )
+    VALUES
+      (
+        'Daniel',
+        'Smith',
+        '2003-04-15',
+        'Midfielder',
+        'Defensive Midfielder',
+        'Right',
+        'Advanced',
+        'Senior',
+        8,
+        10,
+        2,
+        15
+      ),
+      (
+        'Kevin',
+        'Brown',
+        '2004-09-21',
+        'Forward',
+        'Winger',
+        'Left',
+        'Intermediate',
+        'Junior',
+        12,
+        4,
+        0,
+        13
+      ),
+      (
+        'Michael',
+        'Johnson',
+        '2002-11-08',
+        'Goalkeeper',
+        NULL,
+        'Right',
+        'Advanced',
+        'Senior',
+        0,
+        0,
+        9,
+        14
+      );
+  `
+
+  await pool.query(query)
+  console.log('✅ Demo player verification records seeded')
+}
+
 const resetDatabase = async () => {
   try {
     await dropAllTables()
 
     await createUsersTable()
     await createTeamsTable()
+    await createPlayerVerificationRecordsTable()
+    await seedPlayerVerificationRecords()
     await createPlayersTable()
     await createPlayerStatisticsTable()
     await createScoutListTable()

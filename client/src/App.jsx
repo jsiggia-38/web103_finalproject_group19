@@ -1,121 +1,159 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+// Layout components
+import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
+
+// Route protection
+import ProtectedRoute from './components/auth/ProtectedRoute'
+import SignupFlowGuard from './components/auth/SignupFlowGuard'
+
+// Public pages
+import HomePage from './pages/HomePage'
+import PlayersPage from './pages/PlayersPage'
+import PlayerDetailsPage from './pages/PlayerDetailsPage'
+import TeamsPage from './pages/TeamsPage'
+import TeamDetailsPage from './pages/TeamDetailsPage'
+import LoginPage from './pages/LoginPage'
+import SignupPage from './pages/SignupPage'
+import NotFoundPage from './pages/NotFoundPage'
+
+// Player signup flow pages
+import PlayerVerificationPage from './pages/PlayerVerificationPage'
+import CompletePlayerProfilePage from './pages/CompletePlayerProfilePage'
+
+// Authenticated player pages
+import EditPlayerPage from './pages/EditPlayerPage'
+import InvitationsPage from './pages/InvitationsPage'
+
+// Coach / Captain pages
+import ScoutListPage from './pages/ScoutListPage'
+
+// Organizer pages
+import CreateTeamPage from './pages/CreateTeamPage'
+import EditTeamPage from './pages/EditTeamPage'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <BrowserRouter>
+      <div className="app">
+        <Navbar />
 
-      <div className="ticks"></div>
+        <main className="app-main">
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<HomePage />} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+            <Route path="/players" element={<PlayersPage />} />
+            <Route
+              path="/players/:playerId"
+              element={<PlayerDetailsPage />}
+            />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+            <Route path="/teams" element={<TeamsPage />} />
+            <Route
+              path="/teams/:teamId"
+              element={<TeamDetailsPage />}
+            />
+
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+
+            {/* 
+              Player registration flow
+
+              Step 1:
+              The user begins at /signup and selects Student Player.
+
+              Step 2:
+              SignupPage stores the pending signup data in sessionStorage
+              and sends the user to /signup/player-verification.
+
+              Step 3:
+              After verification, the verification record is also stored
+              temporarily and the user continues to
+              /signup/player-profile.
+
+              Step 4:
+              The final page sends the complete player signup request to
+              the backend. The backend creates the user, player profile,
+              and statistics in one database transaction.
+            */}
+
+            <Route
+              path="/signup/player-verification"
+              element={
+                <SignupFlowGuard requiredStep="signup">
+                  <PlayerVerificationPage />
+                </SignupFlowGuard>
+              }
+            />
+
+            <Route
+              path="/signup/player-profile"
+              element={
+                <SignupFlowGuard requiredStep="verification">
+                  <CompletePlayerProfilePage />
+                </SignupFlowGuard>
+              }
+            />
+
+            {/* Authenticated player routes */}
+            <Route
+              path="/players/:playerId/edit"
+              element={
+                <ProtectedRoute allowedRoles={['Player']}>
+                  <EditPlayerPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/invitations"
+              element={
+                <ProtectedRoute allowedRoles={['Player']}>
+                  <InvitationsPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Coach and captain routes */}
+            <Route
+              path="/scout-list"
+              element={
+                <ProtectedRoute allowedRoles={['Coach', 'Captain']}>
+                  <ScoutListPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Club organizer routes */}
+            <Route
+              path="/teams/new"
+              element={
+                <ProtectedRoute allowedRoles={['Organizer']}>
+                  <CreateTeamPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/teams/:teamId/edit"
+              element={
+                <ProtectedRoute allowedRoles={['Organizer']}>
+                  <EditTeamPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* 404 route */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+    </BrowserRouter>
   )
 }
 
