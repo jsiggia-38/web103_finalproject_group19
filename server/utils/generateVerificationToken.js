@@ -35,6 +35,12 @@ export const generateVerificationToken = (
 }
 
 export const verifyPlayerSignupToken = (token) => {
+  if (!token || typeof token !== 'string') {
+    throw new Error(
+      'A verification token is required.'
+    )
+  }
+
   const decoded = jwt.verify(
     token,
     getVerificationSecret()
