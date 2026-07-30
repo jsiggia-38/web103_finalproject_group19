@@ -1,4 +1,8 @@
-import VerificationModel from '../models/verificationModel.js'
+import {
+  findVerificationRecord,
+  getVerificationRecordById,
+  createDemoVerificationRecord
+} from '../models/verificationModel.js'
 
 import {
   generateVerificationToken,
@@ -70,7 +74,7 @@ const verifyPlayer = async (req, res) => {
     }
 
     const record =
-      await VerificationModel.findVerificationRecord({
+      await findVerificationRecord({
         firstName,
         lastName,
         dateOfBirth
@@ -93,7 +97,7 @@ const verifyPlayer = async (req, res) => {
       verificationToken,
       expiresIn: '15 minutes',
 
-      // This preview is for display only.
+      // Display-only preview.
       // The backend will retrieve the real values again
       // during final account creation.
       preview: {
@@ -103,13 +107,20 @@ const verifyPlayer = async (req, res) => {
           record.primary_position,
         secondaryPosition:
           record.secondary_position,
-        preferredFoot: record.preferred_foot,
-        skillLevel: record.skill_level,
-        classYear: record.class_year,
-        goals: record.goals,
-        assists: record.assists,
-        cleanSheets: record.clean_sheets,
-        gamesPlayed: record.games_played
+        preferredFoot:
+          record.preferred_foot,
+        skillLevel:
+          record.skill_level,
+        classYear:
+          record.class_year,
+        goals:
+          record.goals,
+        assists:
+          record.assists,
+        cleanSheets:
+          record.clean_sheets,
+        gamesPlayed:
+          record.games_played
       },
 
       disclaimer:
@@ -163,7 +174,7 @@ const generateDemoVerification = async (
     }
 
     let record =
-      await VerificationModel.findVerificationRecord({
+      await findVerificationRecord({
         firstName,
         lastName,
         dateOfBirth
@@ -173,7 +184,7 @@ const generateDemoVerification = async (
 
     if (!record) {
       record =
-        await VerificationModel.createDemoVerificationRecord({
+        await createDemoVerificationRecord({
           firstName,
           lastName,
           dateOfBirth
@@ -192,6 +203,7 @@ const generateDemoVerification = async (
         generatedForDemo,
         verificationToken,
         expiresIn: '15 minutes',
+
         preview: {
           firstName: record.first_name,
           lastName: record.last_name,
@@ -201,13 +213,20 @@ const generateDemoVerification = async (
             record.secondary_position,
           preferredFoot:
             record.preferred_foot,
-          skillLevel: record.skill_level,
-          classYear: record.class_year,
-          goals: record.goals,
-          assists: record.assists,
-          cleanSheets: record.clean_sheets,
-          gamesPlayed: record.games_played
+          skillLevel:
+            record.skill_level,
+          classYear:
+            record.class_year,
+          goals:
+            record.goals,
+          assists:
+            record.assists,
+          cleanSheets:
+            record.clean_sheets,
+          gamesPlayed:
+            record.games_played
         },
+
         disclaimer:
           'This profile uses simulated demonstration data and is not connected to an official sports organization.'
       })
@@ -240,7 +259,8 @@ const generateDemoVerification = async (
  * Confirms that a verification token is:
  * - authentic;
  * - unexpired;
- * - intended for player signup.
+ * - intended for player signup;
+ * - connected to a valid verification record.
  */
 const validateVerificationToken = async (
   req,
@@ -249,7 +269,10 @@ const validateVerificationToken = async (
   try {
     const { verificationToken } = req.body
 
-    if (!verificationToken) {
+    if (
+      typeof verificationToken !== 'string' ||
+      verificationToken.trim() === ''
+    ) {
       return res.status(400).json({
         valid: false,
         message:
@@ -263,7 +286,7 @@ const validateVerificationToken = async (
       )
 
     const record =
-      await VerificationModel.getVerificationRecordById(
+      await getVerificationRecordById(
         decoded.verificationId
       )
 
@@ -310,15 +333,18 @@ const getVerificationRecord = async (
       req.params.verificationId
     )
 
-    if (!Number.isInteger(verificationId)) {
+    if (
+      !Number.isInteger(verificationId) ||
+      verificationId <= 0
+    ) {
       return res.status(400).json({
         message:
-          'The verification ID must be a valid integer.'
+          'The verification ID must be a valid positive integer.'
       })
     }
 
     const record =
-      await VerificationModel.getVerificationRecordById(
+      await getVerificationRecordById(
         verificationId
       )
 
@@ -331,6 +357,11 @@ const getVerificationRecord = async (
 
     return res.status(200).json(record)
   } catch (error) {
+    console.error(
+      'Unable to retrieve verification record:',
+      error.message
+    )
+
     return res.status(500).json({
       message:
         'An error occurred while retrieving the verification record.',

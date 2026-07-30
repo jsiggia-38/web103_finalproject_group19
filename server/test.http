@@ -1,0 +1,18 @@
+POST http://localhost:3001/api/verifications/player
+Content-Type: application/json
+
+{
+    "firstName": "Daniel",
+    "lastName": "Smith",
+    "dateOfBirth": "2003-04-15"
+}
+
+
+### Validate verification token
+
+POST http://localhost:3001/api/verifications/validate-token
+Content-Type: application/json
+
+{
+  "verificationToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmljYXRpb25JZCI6MSwicHVycG9zZSI6InBsYXllci1zaWdudXAiLCJpYXQiOjE3ODU0NDA3NzUsImV4cCI6MTc4NTQ0MTY3NX0.paZNKQs5KFnUNL5llSPKh7gCuduYsf4OhLCf0xIWRz0"
+}
