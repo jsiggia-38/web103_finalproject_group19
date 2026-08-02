@@ -1,3 +1,13 @@
+function PlayersPage() {
+  return (
+    <div>
+      <h1>Players Page</h1>
+    </div>
+  );
+}
+
+export default PlayersPage;
+
 const handleVerification = async (event) => {
   event.preventDefault()
 
