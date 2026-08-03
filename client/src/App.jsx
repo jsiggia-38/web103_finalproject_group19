@@ -1,6 +1,12 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Route,
+  Routes
+} from 'react-router-dom'
 
+import HomePage from './pages/HomePage.jsx'
 import PlayerVerificationPage from './pages/PlayerVerificationPage.jsx'
+import CompletePlayerProfilePage from './pages/CompletePlayerProfilePage.jsx'
 
 function App() {
   return (
@@ -8,12 +14,17 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<PlayerVerificationPage />}
+          element={<HomePage />}
         />
 
         <Route
           path="/signup/player-verification"
           element={<PlayerVerificationPage />}
+        />
+
+        <Route
+          path="/signup/player-profile"
+          element={<CompletePlayerProfilePage />}
         />
       </Routes>
     </BrowserRouter>

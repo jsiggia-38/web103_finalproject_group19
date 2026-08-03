@@ -1,20 +1,41 @@
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:3001";
+  import.meta.env.VITE_API_URL ||
+  'http://localhost:3001'
 
-export async function apiRequest(endpoint, options = {}) {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {}),
-    },
-    ...options,
-  });
+export async function apiRequest(
+  endpoint,
+  options = {}
+) {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}${endpoint}`,
+      {
+        ...options,
+        headers: {
+          'Content-Type': 'application/json',
+          ...(options.headers || {})
+        }
+      }
+    )
 
-  const data = await response.json();
+    const data = await response
+      .json()
+      .catch(() => null)
 
-  if (!response.ok) {
-    throw new Error(data.message || "Something went wrong.");
+    if (!response.ok) {
+      throw new Error(
+        data?.message ||
+          'The request could not be completed.'
+      )
+    }
+
+    return data
+  } catch (error) {
+    console.error(
+      `API request failed for ${endpoint}:`,
+      error
+    )
+
+    throw error
   }
-
-  return data;
 }
