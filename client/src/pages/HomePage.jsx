@@ -102,7 +102,7 @@ function HomePage() {
           <div className="home-auth-actions">
             <Link
               to="/login"
-              className="login-link"
+              className="home-login-btn"
             >
               Login
             </Link>
