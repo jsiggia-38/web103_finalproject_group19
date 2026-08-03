@@ -92,7 +92,7 @@ Verified football fields are read-only and cannot be manually changed by the pla
 
 This feature uses simulated verification records for demonstration purposes and is not connected to an official sports governing body.
 
-[gif goes here]
+![Player Verification Demo](./client/public/images/player-verification-2.gif)
 
 ### Search, Filter, and Sort Players(Custom 2)
 Search for players and quickly filter them by:
