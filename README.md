@@ -73,7 +73,7 @@ Verified football fields are read-only and cannot be manually changed by the pla
 
 This feature uses simulated verification records for demonstration purposes and is not connected to an official sports governing body.
 
-<img src="./client/public/images/Player%20Verification%202.gif"
+<img src="./client/public/images/Player%20Verification%207.gif"
      alt="Player Verification Demo"
      width="900">
 
