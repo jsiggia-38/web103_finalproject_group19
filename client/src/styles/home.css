@@ -304,33 +304,92 @@
     background 180ms ease;
 }
 
+/* ===============================
+   Hero action buttons
+================================ */
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.hero-primary-button,
+.hero-secondary-button,
+.hero-profile-button {
+  min-height: 52px;
+  padding: 14px 25px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgb(255 255 255 / 52%);
+  border-radius: 999px;
+
+  background: rgb(13 18 15 / 55%);
+  color: #ffffff;
+
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+
+  transition:
+    color 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+/* Browse Players is green by default */
 .hero-primary-button {
+  border-color: #78dc77;
   background: #78dc77;
   color: #00390a;
 }
 
-.hero-secondary-button {
-  border: 1px solid rgb(255 255 255 / 52%);
+/* Create Profile starts as a green outline */
+.hero-profile-button {
+  border-color: #78dc77;
+  color: #78dc77;
+  background: rgb(120 220 119 / 8%);
+}
+
+/* When hovering anywhere in the button group,
+   remove the default green style from Browse Players */
+.hero-actions:hover .hero-primary-button:not(:hover) {
+  border-color: rgb(255 255 255 / 52%);
   background: rgb(13 18 15 / 55%);
   color: #ffffff;
-  backdrop-filter: blur(10px);
+  box-shadow: none;
+  transform: none;
 }
 
-.hero-profile-button {
-  border: 1px solid #78dc77;
-  background: rgb(120 220 119 / 8%);
-  color: #78dc77;
-}
+/* Whichever button is hovered becomes the green primary button */
+.hero-actions a:hover {
+  border-color: #78dc77;
+  background: #78dc77;
+  color: #00390a;
 
-.hero-primary-button:hover,
-.hero-secondary-button:hover,
-.hero-profile-button:hover {
-  transform: translateY(-2px);
-}
+  transform: translateY(-3px);
 
-.hero-primary-button:hover {
   box-shadow:
-    0 12px 30px rgb(120 220 119 / 25%);
+    0 12px 30px rgb(120 220 119 / 35%);
+}
+
+/* Click/press feedback */
+.hero-actions a:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow:
+    0 5px 15px rgb(120 220 119 / 22%);
+}
+
+/* Keyboard accessibility */
+.hero-actions a:focus-visible {
+  outline: 3px solid rgb(120 220 119 / 40%);
+  outline-offset: 4px;
 }
 
 /* ===============================
@@ -474,6 +533,11 @@
 .view-all-link {
   color: #78dc77;
   font-weight: 800;
+}
+
+.view-all-link:hover {
+  color: #ffffff;
+  
 }
 
 .player-card-grid {
@@ -773,6 +837,12 @@
   background: #78dc77;
   color: #00390a;
   font-weight: 900;
+}
+
+.footer-cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 25px rgb(120 220 119 / 25%);
 }
 
 .footer-bottom {
