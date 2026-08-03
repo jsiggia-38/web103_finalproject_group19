@@ -54,25 +54,6 @@ The backend includes a database reset feature that restores the application to i
 <img width="1920" height="1020" alt="Database" src="https://github.com/user-attachments/assets/38aa28fb-a212-442f-a259-2eba8a590240" />
 
 
-### Student Player Profiles
-
-Students can create, edit, update, and delete football profiles containing their personal information, playing position, preferred foot, skill level, availability, goals, assists, clean sheets, and games played.
-
-
-[gif goes here]
-
-### Team Profiles
-
-View information about college football teams, including team name, division, captain, and current roster.
-
-
-
-[gif goes here]
-
-### Scout List
-
-Team captains and coaches can save promising players to their personal scout list while keeping track of scouting progress through statuses such as Interested, Watching, Contacted, Tryout Invited, and Added to Team.
-
 ## Player Identity and Profile Verification (Custom 1)
 
 Student players must verify their identity using their first name, last name, and date of birth before creating a football profile.
@@ -95,7 +76,6 @@ This feature uses simulated verification records for demonstration purposes and 
 <img src="./client/public/images/Player%20Verification%202.gif"
      alt="Player Verification Demo"
      width="900">
-     
 
 ### Search, Filter, and Sort Players(Custom 2)
 Search for players and quickly filter them by:
@@ -107,6 +87,26 @@ Players can also be sorted by:
 Goals
 Assists
 Skill Level
+
+### Student Player Profiles
+
+Students can create, edit, update, and delete football profiles containing their personal information, playing position, preferred foot, skill level, availability, goals, assists, clean sheets, and games played.
+
+
+[gif goes here]
+
+### Team Profiles
+
+View information about college football teams, including team name, division, captain, and current roster.
+
+
+
+[gif goes here]
+
+### Scout List
+
+Team captains and coaches can save promising players to their personal scout list while keeping track of scouting progress through statuses such as Interested, Watching, Contacted, Tryout Invited, and Added to Team.
+
 
 ### Tryout Invitation Modal (Custom 3)
 Captains and coaches can invite players to upcoming tryouts using a popup modal without leaving the current page. Invitations include the tryout date, location, and a personalized message.
