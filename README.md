@@ -47,6 +47,13 @@ CORS
 
 ## Features
 
+### ✅ Database Reset
+The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
+
+
+<img width="1920" height="1020" alt="Database" src="https://github.com/user-attachments/assets/38aa28fb-a212-442f-a259-2eba8a590240" />
+
+
 ### ✅ Home Page
 
 Modern landing page introducing the platform and highlighting featured players, featured teams, and the player recruitment process.
@@ -54,7 +61,7 @@ Modern landing page introducing the platform and highlighting featured players, 
 homepage.gif
 
 
-## Player Identity and Profile Verification (Custom 1)
+### ✅ Player Identity and Profile Verification (Custom 1)
 
 Student players must verify their identity using their first name, last name, and date of birth before creating a football profile.
 
@@ -77,7 +84,7 @@ This feature uses simulated verification records for demonstration purposes and 
      alt="Player Verification Demo"
      width="900">
 
-### Complete Player Registration
+### ✅ Complete Player Registration
 
 Verified football information is automatically locked after identity verification. Players only complete their account information, biography, profile image, and availability before creating their account.
 
@@ -85,59 +92,49 @@ Verified football information is automatically locked after identity verificatio
      alt="Player Verification Demo"
      width="900">
 
-### Dynamic Player Profiles
+### ✅ Verified Student Player Profiles
 
-Every registered student player receives a dedicated public profile page after completing the verification and registration process.
+Student players can create and manage a verified football profile after completing the player verification process.
 
-Each profile automatically combines verified football information from the demo player registry with the player's own profile details, creating a trusted scouting profile that coaches can evaluate.
+Each profile combines verified football information retrieved from the demo player registry with player-provided information to create a trusted recruiting profile.
 
-The profile displays:
+Players and recruiters can view:
 
 - Verified player badge
 - Profile image
 - Biography
-- Career statistics
 - Playing position
 - Preferred foot
 - Skill level
-- Availability
 - Class year
-- Scouting status
+- Career statistics
+- Availability
 - Team assignment
+- Scouting status
 - Recent tryout invitations
 
-Team captains and coaches can also perform recruitment actions directly from the profile by:
-
-- Adding players to their Scout List
-- Sending Tryout Invitations
+Verified football information remains locked to preserve data integrity, while players can update their biography, profile image, and availability.
 
 <img width="1920" height="1018" alt="Player 1" src="https://github.com/user-attachments/assets/36cdca39-7e91-4d7c-af64-96c545ba91e5" />
 
-### Search, Filter, and Sort Players(Custom 2)
-Search for players and quickly filter them by:
-Playing Position
-Class Year
+
+### Browse Players (Search • Filter • Sort) (Custom 2)
+
+Players can be searched, filtered, and sorted by:
+
+Position
 Skill Level
 Availability
-Players can also be sorted by:
+Class Year
 Goals
 Assists
-Skill Level
 
-### Student Player Profiles
+browse-players.gif
 
-Students can create, edit, update, and delete football profiles containing their personal information, playing position, preferred foot, skill level, availability, goals, assists, clean sheets, and games played.
-
-
-[gif goes here]
 
 ### Team Profiles
 
 View information about college football teams, including team name, division, captain, and current roster.
-
-
-
-[gif goes here]
 
 ### Scout List
 
@@ -147,41 +144,33 @@ Team captains and coaches can save promising players to their personal scout lis
 ### Tryout Invitation Modal (Custom 3)
 Captains and coaches can invite players to upcoming tryouts using a popup modal without leaving the current page. Invitations include the tryout date, location, and a personalized message.
 
-### Player Statistics
-Display football statistics for each player, including:
-Goals
-Assists
-Clean Sheets
-Games Played
-These statistics help coaches evaluate player performance.
 
-### Form Validation
-Player information is validated before submission to ensure all required fields are completed and statistics contain valid values.
-Examples include:
-Position is required.
-Class year is required.
-Goals cannot be negative.
-Assists cannot be negative.
+[gif goes here]
 
 
+
+### AI Assistant(Custom 4)
+An AI assistant that helps the user accomplish their tasks.  
 
 
 ### Responsive User Interface
 The application is fully responsive and optimized for desktop, tablet, and mobile devices.
 
 
-### AI Assistant(Custom 4)
-An AI assistant that helps the user accomplish their tasks.  
+## Recruitment Workflow
 
-### ✅ Database Reset
-The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
+The application guides users through the complete college football recruitment process:
 
+1. Player verifies identity.
+2. Player completes profile registration.
+3. Player profile becomes publicly searchable.
+4. Coaches browse and filter players.
+5. Coaches save players to their Scout List.
+6. Coaches send tryout invitations.
+7. Players monitor scouting status and invitations.
 
-<img width="1920" height="1020" alt="Database" src="https://github.com/user-attachments/assets/38aa28fb-a212-442f-a259-2eba8a590240" />
-
-
-
-[gif goes here]
+<img src="./client/public/images/recruitment-workflow.gif"
+     width="900">
 
 ### [ADDITIONAL FEATURES GO HERE - ADD ALL FEATURES HERE IN THE FORMAT ABOVE; you will check these off and add gifs as you complete them]
 
