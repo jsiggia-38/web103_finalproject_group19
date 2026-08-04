@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage.jsx'
 import PlayerVerificationPage from './pages/PlayerVerificationPage.jsx'
 import CompletePlayerProfilePage from './pages/CompletePlayerProfilePage.jsx'
 import PlayerDetailsPage from "./pages/PlayerDetailsPage.jsx";
+import EditPlayerPage from "./pages/EditPlayerPage.jsx";
 
 function App() {
   return (
@@ -31,6 +32,12 @@ function App() {
          path="/players/:playerId"
          element={<PlayerDetailsPage />}
       />
+
+      <Route
+         path="/players/:playerId/edit"
+         element={<EditPlayerPage />}
+      />
+
       </Routes>
 
      

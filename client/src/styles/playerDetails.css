@@ -511,6 +511,228 @@
   }
 }
 
+.player-edit-action {
+  min-height: 50px;
+  padding: 13px 23px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid
+    rgb(255 255 255 / 35%);
+  border-radius: 999px;
+
+  color: #ffffff;
+  font-weight: 900;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.player-edit-action:hover {
+  border-color: #78dc77;
+  background:
+    rgb(120 220 119 / 10%);
+  color: #78dc77;
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   Player owner actions
+================================ */
+
+.player-delete-action {
+  min-height: 50px;
+  padding: 13px 23px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #ff6b6b;
+  border-radius: 999px;
+
+  background: transparent;
+  color: #ff8a8a;
+
+  font-weight: 900;
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.player-delete-action:hover {
+  border-color: #ff8a8a;
+  background: rgb(255 107 107 / 12%);
+  color: #ffb4b4;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgb(255 107 107 / 16%);
+}
+
+/* ===============================
+   Delete confirmation modal
+================================ */
+
+.delete-profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+
+  display: grid;
+  place-items: center;
+
+  padding: 22px;
+
+  background: rgb(0 0 0 / 78%);
+  backdrop-filter: blur(9px);
+}
+
+.delete-profile-modal {
+  width: min(100%, 520px);
+  padding: 36px;
+
+  border: 1px solid rgb(255 107 107 / 48%);
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #17100f,
+      #0d1110
+    );
+
+  color: #ffffff;
+  text-align: center;
+
+  box-shadow:
+    0 30px 90px rgb(0 0 0 / 70%),
+    0 0 30px rgb(255 107 107 / 9%);
+}
+
+.delete-profile-warning-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+
+  display: grid;
+  place-items: center;
+
+  border: 2px solid #ff6b6b;
+  border-radius: 50%;
+
+  background: rgb(255 107 107 / 11%);
+  color: #ff8a8a;
+
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.delete-profile-modal h2 {
+  margin: 0 0 14px;
+
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 1.8rem;
+}
+
+.delete-profile-modal > p {
+  color: #c8cfca;
+  line-height: 1.65;
+}
+
+.delete-profile-warning-text {
+  color: #ff9d9d !important;
+  font-weight: 800;
+}
+
+.delete-profile-modal-error {
+  margin-top: 18px;
+  padding: 12px 14px;
+
+  border: 1px solid rgb(255 107 107 / 40%);
+  border-radius: 9px;
+
+  background: rgb(147 0 10 / 18%);
+  color: #ffb4ab !important;
+
+  font-weight: 700;
+}
+
+.delete-profile-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  margin-top: 28px;
+}
+
+.delete-profile-cancel-button,
+.delete-profile-confirm-button {
+  min-height: 48px;
+  padding: 13px 21px;
+
+  border-radius: 999px;
+
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.delete-profile-cancel-button {
+  border: 1px solid rgb(255 255 255 / 28%);
+  background: transparent;
+  color: #ffffff;
+}
+
+.delete-profile-confirm-button {
+  border: 1px solid #ff6b6b;
+  background: #ff6b6b;
+  color: #1f0000;
+}
+
+.delete-profile-cancel-button:hover {
+  border-color: #78dc77;
+  color: #78dc77;
+}
+
+.delete-profile-confirm-button:hover {
+  background: #ff8585;
+  border-color: #ff8585;
+}
+
+.delete-profile-cancel-button:disabled,
+.delete-profile-confirm-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 540px) {
+  .delete-profile-modal {
+    padding: 28px 20px;
+  }
+
+  .delete-profile-modal-actions {
+    flex-direction: column;
+  }
+
+  .delete-profile-cancel-button,
+  .delete-profile-confirm-button {
+    width: 100%;
+  }
+}
+
+
 @media (max-width: 900px) {
   .player-profile-hero {
     grid-template-columns: 240px 1fr;

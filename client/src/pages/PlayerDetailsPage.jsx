@@ -1,7 +1,15 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+  import { useEffect, useState } from "react";
 
-import { getPlayerById } from "../services/playerService.js";
+import {
+  Link,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+
+import {
+  deletePlayerProfile,
+  getPlayerById,
+} from "../services/playerService.js";
 
 import "../styles/playerDetails.css";
 
@@ -10,11 +18,48 @@ const DEFAULT_PLAYER_IMAGE =
 
 function PlayerDetailsPage() {
   const { playerId } = useParams();
+  const navigate = useNavigate();
 
   const [player, setPlayer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [imageError, setImageError] = useState(false);
+
+  const [showDeleteModal, setShowDeleteModal] =
+  useState(false);
+
+const [deleting, setDeleting] =
+  useState(false);
+
+const [deleteError, setDeleteError] =
+  useState("");
+
+const handleDeleteProfile = async () => {
+  try {
+    setDeleting(true);
+    setDeleteError("");
+
+    const result =
+      await deletePlayerProfile(playerId);
+
+    sessionStorage.removeItem(
+      "createdPlayerAccount",
+    );
+
+    setShowDeleteModal(false);
+
+    alert(result.message);
+
+    navigate("/");
+  } catch (requestError) {
+    setDeleteError(
+      requestError.message ||
+        "Unable to delete the player profile.",
+    );
+  } finally {
+    setDeleting(false);
+  }
+};
 
   useEffect(() => {
     const loadPlayer = async () => {
@@ -175,30 +220,25 @@ function PlayerDetailsPage() {
             </div>
 
             <div className="player-profile-actions">
-              <button
-                type="button"
-                className="player-primary-action"
-                onClick={() => {
-                  alert(
-                    "The Scout List feature will be connected in the next phase.",
-                  );
-                }}
-              >
-                Add to Scout List
-              </button>
+  <Link
+    to={`/players/${player.playerId}/edit`}
+    className="player-edit-action"
+  >
+    Edit Profile
+  </Link>
 
-              <button
-                type="button"
-                className="player-secondary-action"
-                onClick={() => {
-                  alert(
-                    "The Tryout Invitation feature will be connected in a later phase.",
-                  );
-                }}
-              >
-                Invite to Tryout
-              </button>
-            </div>
+  <button
+    type="button"
+    className="player-delete-action"
+    onClick={() => {
+      setDeleteError("");
+      setShowDeleteModal(true);
+    }}
+  >
+    Delete Profile
+  </button>
+</div>
+              
           </div>
         </section>
 
@@ -412,6 +452,78 @@ function PlayerDetailsPage() {
           </div>
         </section>
       </div>
+      {showDeleteModal && (
+  <div
+    className="delete-profile-modal-overlay"
+    role="presentation"
+    onMouseDown={(event) => {
+      if (
+        event.target === event.currentTarget &&
+        !deleting
+      ) {
+        setShowDeleteModal(false);
+      }
+    }}
+  >
+    <section
+      className="delete-profile-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="delete-profile-title"
+    >
+      <div className="delete-profile-warning-icon">
+        !
+      </div>
+
+      <h2 id="delete-profile-title">
+        Delete Player Profile?
+      </h2>
+
+      <p>
+        This will permanently delete your player
+        account, profile information, statistics,
+        scouting records, and tryout invitations.
+      </p>
+
+      <p className="delete-profile-warning-text">
+        This action cannot be undone.
+      </p>
+
+      {deleteError && (
+        <p
+          className="delete-profile-modal-error"
+          role="alert"
+        >
+          {deleteError}
+        </p>
+      )}
+
+      <div className="delete-profile-modal-actions">
+        <button
+          type="button"
+          className="delete-profile-cancel-button"
+          disabled={deleting}
+          onClick={() => {
+            setShowDeleteModal(false);
+          }}
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          className="delete-profile-confirm-button"
+          disabled={deleting}
+          onClick={handleDeleteProfile}
+        >
+          {deleting
+            ? "Deleting Profile..."
+            : "Yes, Delete Profile"}
+        </button>
+      </div>
+    </section>
+  </div>
+)}
     </main>
   );
 }

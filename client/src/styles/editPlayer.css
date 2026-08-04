@@ -1,0 +1,548 @@
+.edit-player-page,
+.edit-player-state-page {
+  width: 100%;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgb(120 220 119 / 9%),
+      transparent 36%
+    ),
+    #071009;
+
+  color: #ffffff;
+}
+
+.edit-player-page {
+  padding: 38px 24px 90px;
+}
+
+.edit-player-container {
+  width: min(100%, 1050px);
+  margin: 0 auto;
+}
+
+.edit-player-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 25px;
+  padding: 12px 18px;
+
+  border: 1px solid
+    rgb(120 220 119 / 42%);
+  border-radius: 12px;
+
+  background: rgb(10 20 13 / 88%);
+  color: #ffffff;
+
+  font-weight: 800;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.edit-player-back-link:hover {
+  color: #78dc77;
+  border-color: #78dc77;
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgb(0 0 0 / 36%),
+    0 0 18px
+      rgb(120 220 119 / 14%);
+}
+
+.edit-player-card {
+  padding: 44px;
+
+  border: 1px solid
+    rgb(120 220 119 / 44%);
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgb(8 18 11 / 97%),
+      rgb(10 21 14 / 96%)
+    );
+
+  box-shadow:
+    0 30px 85px rgb(0 0 0 / 55%);
+}
+
+.edit-player-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 21px;
+
+  padding-bottom: 30px;
+
+  border-bottom:
+    1px solid
+      rgb(120 220 119 / 15%);
+}
+
+.edit-player-header-icon {
+  flex: 0 0 auto;
+
+  width: 68px;
+  height: 68px;
+
+  display: grid;
+  place-items: center;
+
+  border: 3px solid #78dc77;
+  border-radius: 18px;
+
+  background:
+    rgb(120 220 119 / 8%);
+
+  font-size: 2rem;
+}
+
+.edit-player-eyebrow {
+  margin: 0 0 8px;
+
+  color: #78dc77;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.edit-player-header h1 {
+  margin: 0 0 10px;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(2rem, 5vw, 3.2rem);
+
+  line-height: 1.05;
+}
+
+.edit-player-header h1 span {
+  color: #78dc77;
+}
+
+.edit-player-header p:last-child {
+  margin: 0;
+  color: #becab9;
+  line-height: 1.65;
+}
+
+.edit-player-summary {
+  margin-top: 30px;
+  padding: 26px;
+
+  display: grid;
+  grid-template-columns:
+    220px 1fr;
+  gap: 26px;
+
+  border: 1px solid
+    rgb(120 220 119 / 24%);
+  border-radius: 17px;
+
+  background:
+    rgb(21 32 24 / 75%);
+}
+
+.edit-player-image-wrapper {
+  width: 100%;
+  height: 240px;
+
+  overflow: hidden;
+
+  border: 1px solid
+    rgb(120 220 119 / 35%);
+  border-radius: 15px;
+
+  background: #101a13;
+}
+
+.edit-player-image,
+.edit-player-image-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.edit-player-image {
+  display: block;
+  object-fit: cover;
+}
+
+.edit-player-image-placeholder {
+  display: grid;
+  place-items: center;
+
+  font-size: 4rem;
+
+  background:
+    radial-gradient(
+      circle,
+      rgb(120 220 119 / 18%),
+      #101a13 70%
+    );
+}
+
+.edit-player-summary-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.edit-player-verified-badge {
+  width: fit-content;
+
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  background:
+    rgb(120 220 119 / 13%);
+  color: #78dc77;
+
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.edit-player-summary-content h2 {
+  margin: 13px 0 6px;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-size: 2rem;
+}
+
+.edit-player-summary-content > p {
+  margin: 0 0 18px;
+  color: #becab9;
+  font-weight: 700;
+}
+
+.edit-player-locked-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.edit-player-locked-grid div {
+  padding: 13px;
+
+  border: 1px solid
+    rgb(190 202 185 / 10%);
+  border-radius: 9px;
+
+  background: #0b140e;
+}
+
+.edit-player-locked-grid span,
+.edit-player-locked-grid strong {
+  display: block;
+}
+
+.edit-player-locked-grid span {
+  margin-bottom: 4px;
+
+  color: #8f9b8d;
+  font-size: 0.67rem;
+  text-transform: uppercase;
+}
+
+.edit-player-form {
+  margin-top: 24px;
+}
+
+.edit-player-form-section {
+  padding: 28px;
+
+  border: 1px solid
+    rgb(190 202 185 / 13%);
+  border-radius: 17px;
+
+  background:
+    rgb(13 22 16 / 82%);
+}
+
+.edit-player-section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.edit-player-section-heading > span {
+  flex: 0 0 auto;
+
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background:
+    rgb(120 220 119 / 13%);
+  color: #78dc77;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-weight: 900;
+}
+
+.edit-player-section-heading h2 {
+  margin: 0 0 6px;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+}
+
+.edit-player-section-heading p {
+  margin: 0;
+  color: #98a496;
+}
+
+.edit-player-form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.edit-player-form-group +
+.edit-player-form-group {
+  margin-top: 19px;
+}
+
+.edit-player-form-group label {
+  color: #f4f6f3;
+  font-weight: 800;
+}
+
+.edit-player-form-group input,
+.edit-player-form-group textarea,
+.edit-player-form-group select {
+  width: 100%;
+  padding: 14px 15px;
+
+  border: 1px solid #526151;
+  border-radius: 9px;
+
+  background: #1b241d;
+  color: #ffffff;
+}
+
+.edit-player-form-group textarea {
+  min-height: 145px;
+  resize: vertical;
+}
+
+.edit-player-form-group input:focus,
+.edit-player-form-group textarea:focus,
+.edit-player-form-group select:focus {
+  border-color: #78dc77;
+  outline: none;
+
+  box-shadow:
+    0 0 0 3px
+      rgb(120 220 119 / 14%);
+}
+
+.edit-player-success,
+.edit-player-error-message {
+  margin: 22px 0 0;
+  padding: 13px 15px;
+
+  border-radius: 9px;
+  font-weight: 800;
+}
+
+.edit-player-success {
+  border: 1px solid
+    rgb(120 220 119 / 45%);
+  background:
+    rgb(120 220 119 / 12%);
+  color: #78dc77;
+}
+
+.edit-player-error-message {
+  border: 1px solid
+    rgb(255 180 171 / 38%);
+  background:
+    rgb(147 0 10 / 18%);
+  color: #ffb4ab;
+}
+
+.edit-player-submit-area {
+  margin-top: 25px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 13px;
+}
+
+.edit-player-cancel-button,
+.edit-player-save-button {
+  min-height: 49px;
+  padding: 13px 22px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  font-weight: 900;
+}
+
+.edit-player-cancel-button {
+  border: 1px solid
+    rgb(255 255 255 / 30%);
+
+  color: #ffffff;
+}
+
+.edit-player-save-button {
+  border: 1px solid #78dc77;
+
+  background: #78dc77;
+  color: #00390a;
+
+  cursor: pointer;
+}
+
+.edit-player-cancel-button:hover,
+.edit-player-save-button:hover {
+  transform: translateY(-2px);
+}
+
+.edit-player-save-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.edit-player-state-page {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.edit-player-state-card {
+  width: min(100%, 560px);
+  padding: 42px;
+
+  border: 1px solid
+    rgb(120 220 119 / 40%);
+  border-radius: 20px;
+
+  background:
+    rgb(9 19 12 / 96%);
+
+  text-align: center;
+}
+
+.edit-player-state-card h1 {
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+}
+
+.edit-player-state-card p {
+  color: #becab9;
+}
+
+.edit-player-error {
+  color: #ffb4ab !important;
+}
+
+.edit-player-state-link {
+  display: inline-flex;
+  margin-top: 15px;
+  padding: 12px 21px;
+
+  border-radius: 999px;
+
+  background: #78dc77;
+  color: #00390a;
+
+  font-weight: 900;
+}
+
+.edit-player-spinner {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 20px;
+
+  border: 4px solid
+    rgb(120 220 119 / 18%);
+  border-top-color: #78dc77;
+  border-radius: 50%;
+
+  animation:
+    edit-player-spin
+    800ms linear infinite;
+}
+
+@keyframes edit-player-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .edit-player-page {
+    padding:
+      24px 15px 60px;
+  }
+
+  .edit-player-card {
+    padding: 27px 18px;
+  }
+
+  .edit-player-header {
+    flex-direction: column;
+  }
+
+  .edit-player-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-player-image-wrapper {
+    width: min(100%, 300px);
+    margin: 0 auto;
+  }
+
+  .edit-player-locked-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-player-submit-area {
+    flex-direction: column-reverse;
+  }
+
+  .edit-player-cancel-button,
+  .edit-player-save-button {
+    width: 100%;
+  }
+}
