@@ -117,17 +117,37 @@ const createScoutListTable = async () => {
   const query = `
     CREATE TABLE IF NOT EXISTS scout_list (
       scout_id SERIAL PRIMARY KEY,
-      coach_id INTEGER REFERENCES users(user_id),
-      player_id INTEGER REFERENCES players(player_id),
-      team_id INTEGER REFERENCES teams(team_id),
-      status VARCHAR(50),
+
+      coach_id INTEGER NOT NULL
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
+      player_id INTEGER NOT NULL
+        REFERENCES players(player_id)
+        ON DELETE CASCADE,
+
+      team_id INTEGER NOT NULL
+        REFERENCES teams(team_id)
+        ON DELETE CASCADE,
+
+      status VARCHAR(50)
+        NOT NULL
+        DEFAULT 'Interested',
+
       scouting_notes TEXT,
-      date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+      date_added TIMESTAMP
+        DEFAULT CURRENT_TIMESTAMP,
+
+      updated_at TIMESTAMP
+        DEFAULT CURRENT_TIMESTAMP,
+
+      UNIQUE(coach_id, player_id, team_id)
     );
   `
 
   await pool.query(query)
+
   console.log('✅ Scout List table created')
 }
 
@@ -135,20 +155,38 @@ const createTryoutInvitationsTable = async () => {
   const query = `
     CREATE TABLE IF NOT EXISTS tryout_invitations (
       invitation_id SERIAL PRIMARY KEY,
-      coach_id INTEGER REFERENCES users(user_id),
-      player_id INTEGER REFERENCES players(player_id),
-      team_id INTEGER REFERENCES teams(team_id),
-      tryout_date DATE,
-      tryout_time TIME,
-      location VARCHAR(255),
+
+      coach_id INTEGER NOT NULL
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
+      player_id INTEGER NOT NULL
+        REFERENCES players(player_id)
+        ON DELETE CASCADE,
+
+      team_id INTEGER NOT NULL
+        REFERENCES teams(team_id)
+        ON DELETE CASCADE,
+
+      tryout_date DATE NOT NULL,
+      tryout_time TIME NOT NULL,
+      location VARCHAR(255) NOT NULL,
       message TEXT,
-      invitation_status VARCHAR(25),
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+      invitation_status VARCHAR(25)
+        NOT NULL
+        DEFAULT 'Pending',
+
+      created_at TIMESTAMP
+        DEFAULT CURRENT_TIMESTAMP
     );
   `
 
   await pool.query(query)
-  console.log('✅ Tryout Invitations table created')
+
+  console.log(
+    '✅ Tryout Invitations table created'
+  )
 }
 
 const createPlayerVerificationRecordsTable = async () => {
