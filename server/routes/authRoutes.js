@@ -1,19 +1,35 @@
 import express from 'express'
 
 import {
-  signupVerifiedPlayer
+  signupVerifiedPlayer,
+  signupStaffUser,
+  loginUser
 } from '../controllers/authController.js'
 
 const router = express.Router()
 
 /**
- * POST /api/auth/signup/player
- *
- * Creates a verified player account.
+ * Verified player registration
  */
 router.post(
   '/signup/player',
   signupVerifiedPlayer
+)
+
+/**
+ * Coach or Organizer registration
+ */
+router.post(
+  '/signup/staff',
+  signupStaffUser
+)
+
+/**
+ * Shared login for all account roles
+ */
+router.post(
+  '/login',
+  loginUser
 )
 
 export default router

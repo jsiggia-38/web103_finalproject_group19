@@ -35,3 +35,62 @@ textarea,
 select {
   font: inherit;
 }
+
+.temporary-dashboard-page {
+  width: 100%;
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  padding: 24px;
+
+  background: #071009;
+  color: #ffffff;
+}
+
+.temporary-dashboard-card {
+  width: min(100%, 650px);
+  padding: 42px;
+
+  border:
+    1px solid
+    rgb(120 220 119 / 42%);
+
+  border-radius: 22px;
+
+  background: #0b1710;
+  text-align: center;
+}
+
+.temporary-dashboard-card > p:first-child {
+  color: #78dc77;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.temporary-dashboard-card h1 {
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+}
+
+.temporary-dashboard-card p {
+  color: #becab9;
+  line-height: 1.7;
+}
+
+.temporary-dashboard-card a {
+  display: inline-flex;
+
+  margin-top: 16px;
+  padding: 12px 21px;
+
+  border-radius: 999px;
+
+  background: #78dc77;
+  color: #00390a;
+
+  font-weight: 900;
+}

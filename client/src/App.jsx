@@ -9,6 +9,10 @@ import PlayerVerificationPage from './pages/PlayerVerificationPage.jsx'
 import CompletePlayerProfilePage from './pages/CompletePlayerProfilePage.jsx'
 import PlayerDetailsPage from "./pages/PlayerDetailsPage.jsx";
 import EditPlayerPage from "./pages/EditPlayerPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import CoachDashboardPage from "./pages/CoachDashboardPage.jsx";
+import OrganizerDashboardPage from "./pages/OrganizerDashboardPage.jsx";
 
 function App() {
   return (
@@ -37,7 +41,25 @@ function App() {
          path="/players/:playerId/edit"
          element={<EditPlayerPage />}
       />
+      <Route
+         path="/signup"
+         element={<SignupPage />}
+      />
 
+      <Route
+  path="/login"
+  element={<LoginPage />}
+/>
+
+<Route
+  path="/dashboard/coach"
+  element={<CoachDashboardPage />}
+/>
+
+<Route
+  path="/dashboard/organizer"
+  element={<OrganizerDashboardPage />}
+/>
       </Routes>
 
      

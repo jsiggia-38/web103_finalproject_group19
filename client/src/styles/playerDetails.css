@@ -732,6 +732,138 @@
   }
 }
 
+/* ===============================
+   Player dashboard top bar
+================================ */
+
+.player-dashboard-topbar {
+  margin-bottom: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.player-dashboard-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.player-dashboard-brand-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border: 2px solid #78dc77;
+  border-radius: 13px;
+
+  background: rgb(120 220 119 / 9%);
+  font-size: 1.45rem;
+}
+
+.player-dashboard-brand strong,
+.player-dashboard-brand small {
+  display: block;
+}
+
+.player-dashboard-brand strong {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+
+.player-dashboard-brand small {
+  margin-top: 2px;
+
+  color: #78dc77;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.player-dashboard-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-dashboard-user-name {
+  color: #becab9;
+  font-weight: 700;
+}
+
+.player-dashboard-home-link,
+.player-dashboard-logout-button {
+  min-height: 43px;
+  padding: 11px 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  font-weight: 900;
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.player-dashboard-home-link {
+  border: 1px solid rgb(255 255 255 / 26%);
+  background: transparent;
+  color: #ffffff;
+}
+
+.player-dashboard-home-link:hover {
+  border-color: #78dc77;
+  color: #78dc77;
+  transform: translateY(-2px);
+}
+
+.player-dashboard-logout-button {
+  border: 1px solid #78dc77;
+  background: #78dc77;
+  color: #00390a;
+
+  cursor: pointer;
+}
+
+.player-dashboard-logout-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px
+    rgb(120 220 119 / 22%);
+}
+
+@media (max-width: 700px) {
+  .player-dashboard-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .player-dashboard-user-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .player-dashboard-user-name {
+    width: 100%;
+  }
+}
 
 @media (max-width: 900px) {
   .player-profile-hero {

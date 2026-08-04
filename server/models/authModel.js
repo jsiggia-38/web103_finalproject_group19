@@ -17,6 +17,30 @@ const findUserByEmail = async (email) => {
   return result.rows[0] || null
 }
 
+const findUserForLogin = async (email) => {
+  const query = `
+    SELECT
+      u.user_id,
+      u.first_name,
+      u.last_name,
+      u.email,
+      u.password,
+      u.role,
+      p.player_id
+    FROM users AS u
+    LEFT JOIN players AS p
+      ON p.user_id = u.user_id
+    WHERE LOWER(u.email) = LOWER($1);
+  `
+
+  const result = await pool.query(
+    query,
+    [email]
+  )
+
+  return result.rows[0] || null
+}
+
 const createVerifiedPlayerAccount = async ({
   verificationRecord,
   email,
@@ -140,7 +164,48 @@ const createVerifiedPlayerAccount = async ({
   }
 }
 
+const createStaffAccount = async ({
+  firstName,
+  lastName,
+  email,
+  hashedPassword,
+  role
+}) => {
+  const query = `
+    INSERT INTO users (
+      first_name,
+      last_name,
+      email,
+      password,
+      role
+    )
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING
+      user_id,
+      first_name,
+      last_name,
+      email,
+      role,
+      created_at;
+  `
+
+  const result = await pool.query(
+    query,
+    [
+      firstName,
+      lastName,
+      email,
+      hashedPassword,
+      role
+    ]
+  )
+
+  return result.rows[0]
+}
+
 export {
   findUserByEmail,
-  createVerifiedPlayerAccount
+  findUserForLogin,
+  createVerifiedPlayerAccount,
+  createStaffAccount
 }

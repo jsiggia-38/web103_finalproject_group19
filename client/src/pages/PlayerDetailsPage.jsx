@@ -34,6 +34,16 @@ const [deleting, setDeleting] =
 const [deleteError, setDeleteError] =
   useState("");
 
+const handleLogout = () => {
+  sessionStorage.removeItem("authToken");
+  sessionStorage.removeItem("authenticatedUser");
+  sessionStorage.removeItem("createdPlayerAccount");
+
+  navigate("/login", {
+    replace: true,
+  });
+};
+
 const handleDeleteProfile = async () => {
   try {
     setDeleting(true);
@@ -150,13 +160,42 @@ const handleDeleteProfile = async () => {
   return (
     <main className="player-details-page">
       <div className="player-details-container">
-        <Link
-          to="/players"
-          className="player-details-back-link"
-        >
-          <span>←</span>
-          Back to Players
-        </Link>
+        <header className="player-dashboard-topbar">
+  <Link
+    to="/"
+    className="player-dashboard-brand"
+  >
+    <span className="player-dashboard-brand-icon">
+      ⚽
+    </span>
+
+    <span>
+      <strong>College Soccer</strong>
+      <small>Scout Helper</small>
+    </span>
+  </Link>
+
+  <div className="player-dashboard-user-actions">
+    <span className="player-dashboard-user-name">
+      {player.firstName} {player.lastName}
+    </span>
+
+    <Link
+      to="/"
+      className="player-dashboard-home-link"
+    >
+      Home
+    </Link>
+
+    <button
+      type="button"
+      className="player-dashboard-logout-button"
+      onClick={handleLogout}
+    >
+      Log Out
+    </button>
+  </div>
+</header>
 
         <section className="player-profile-hero">
           <div className="player-profile-image-wrapper">
@@ -176,7 +215,7 @@ const handleDeleteProfile = async () => {
 
           <div className="player-profile-introduction">
             <p className="player-profile-eyebrow">
-              Verified Soccer Player
+              Student Player Dashboard
             </p>
 
             <div className="player-name-row">

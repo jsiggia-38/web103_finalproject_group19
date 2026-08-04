@@ -27,3 +27,36 @@ export const signupVerifiedPlayer = async ({
     throw error
   }
 }
+
+export const signupStaffUser = async ({
+  firstName,
+  lastName,
+  email,
+  password,
+  role,
+}) => {
+  return apiRequest("/api/auth/signup/staff", {
+    method: "POST",
+    body: JSON.stringify({
+      firstName,
+      lastName,
+      email,
+      password,
+      role,
+    }),
+  });
+};
+
+
+export const loginUser = async ({
+  email,
+  password,
+}) => {
+  return apiRequest("/api/auth/login", {
+    method: "POST",
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+};

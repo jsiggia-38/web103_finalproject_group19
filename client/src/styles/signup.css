@@ -1,0 +1,514 @@
+.staff-signup-page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 90px 24px;
+
+  position: relative;
+
+  background:
+    linear-gradient(
+      rgb(3 11 7 / 70%),
+      rgb(2 8 5 / 84%)
+    ),
+    url("/images/homepage-background.png")
+      center / cover no-repeat fixed;
+
+  color: #ffffff;
+}
+
+.staff-signup-back-link {
+  position: absolute;
+  top: 28px;
+  left: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 12px 18px;
+
+  border:
+    1px solid
+    rgb(120 220 119 / 42%);
+
+  border-radius: 12px;
+
+  background:
+    rgb(8 18 11 / 84%);
+
+  color: #ffffff;
+  font-weight: 800;
+
+  backdrop-filter: blur(12px);
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.staff-signup-back-link:hover {
+  color: #78dc77;
+  border-color: #78dc77;
+  transform: translateY(-2px);
+}
+
+.staff-signup-card {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 42px;
+
+  border:
+    1px solid
+    rgb(120 220 119 / 42%);
+
+  border-radius: 24px;
+
+  background:
+    rgb(5 16 10 / 95%);
+
+  box-shadow:
+    0 30px 90px
+    rgb(0 0 0 / 58%);
+
+  backdrop-filter: blur(15px);
+}
+
+.staff-signup-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+
+  padding-bottom: 30px;
+
+  border-bottom:
+    1px solid
+    rgb(120 220 119 / 15%);
+}
+
+.staff-signup-icon {
+  flex: 0 0 auto;
+
+  width: 68px;
+  height: 68px;
+
+  display: grid;
+  place-items: center;
+
+  border: 3px solid #78dc77;
+  border-radius: 18px;
+
+  background:
+    rgb(120 220 119 / 8%);
+
+  font-size: 2rem;
+}
+
+.staff-signup-eyebrow {
+  margin: 0 0 8px;
+
+  color: #78dc77;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.staff-signup-header h1 {
+  margin: 0 0 10px;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(2rem, 5vw, 3.3rem);
+
+  line-height: 1.05;
+}
+
+.staff-signup-header h1 span {
+  color: #78dc77;
+}
+
+.staff-signup-header p:last-child {
+  margin: 0;
+
+  color: #becab9;
+  line-height: 1.65;
+}
+
+.staff-role-selection {
+  margin-top: 30px;
+}
+
+.staff-role-selection h2 {
+  margin-bottom: 7px;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+}
+
+.staff-role-selection > p {
+  margin: 0 0 20px;
+  color: #98a496;
+}
+
+.staff-role-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.staff-role-card {
+  min-height: 205px;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+
+  border:
+    1px solid
+    rgb(190 202 185 / 18%);
+
+  border-radius: 16px;
+
+  background:
+    rgb(15 26 18 / 86%);
+
+  cursor: pointer;
+
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.staff-role-card:hover {
+  border-color:
+    rgb(120 220 119 / 55%);
+
+  transform: translateY(-3px);
+}
+
+.staff-role-card.selected {
+  border-color: #78dc77;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgb(120 220 119 / 15%),
+      rgb(15 26 18 / 94%)
+    );
+
+  box-shadow:
+    0 14px 34px
+    rgb(120 220 119 / 10%);
+}
+
+.staff-role-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.staff-role-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background:
+    rgb(120 220 119 / 13%);
+
+  font-size: 1.4rem;
+}
+
+.staff-role-card strong {
+  color: #ffffff;
+  font-size: 1.08rem;
+}
+
+.staff-role-card small {
+  color: #aeb8aa;
+  line-height: 1.6;
+}
+
+.staff-signup-form {
+  margin-top: 24px;
+  padding: 28px;
+
+  border:
+    1px solid
+    rgb(190 202 185 / 14%);
+
+  border-radius: 17px;
+
+  background:
+    rgb(11 21 14 / 88%);
+}
+
+.staff-form-section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.staff-form-section-heading > span {
+  flex: 0 0 auto;
+
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background:
+    rgb(120 220 119 / 13%);
+
+  color: #78dc77;
+  font-weight: 900;
+}
+
+.staff-form-section-heading h2 {
+  margin: 0 0 6px;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+}
+
+.staff-form-section-heading p {
+  margin: 0;
+  color: #98a496;
+}
+
+.staff-form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.staff-form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.staff-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.staff-form-group label {
+  color: #f4f6f3;
+  font-weight: 800;
+}
+
+.staff-form-group input {
+  width: 100%;
+  padding: 14px 15px;
+
+  border: 1px solid #526151;
+  border-radius: 9px;
+
+  background: #1b241d;
+  color: #ffffff;
+}
+
+.staff-form-group input:focus {
+  border-color: #78dc77;
+  outline: none;
+
+  box-shadow:
+    0 0 0 3px
+    rgb(120 220 119 / 14%);
+}
+
+.staff-signup-success,
+.staff-signup-error {
+  margin: 22px 0 0;
+  padding: 13px 15px;
+
+  border-radius: 9px;
+  font-weight: 800;
+}
+
+.staff-signup-success {
+  border:
+    1px solid
+    rgb(120 220 119 / 42%);
+
+  background:
+    rgb(120 220 119 / 12%);
+
+  color: #78dc77;
+}
+
+.staff-signup-error {
+  border:
+    1px solid
+    rgb(255 107 107 / 42%);
+
+  background:
+    rgb(147 0 10 / 18%);
+
+  color: #ffb4ab;
+}
+
+.staff-signup-submit-area {
+  margin-top: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.staff-signup-submit-area p {
+  margin: 0;
+  color: #aeb8aa;
+}
+
+.staff-signup-submit-area a {
+  color: #78dc77;
+  font-weight: 800;
+}
+
+.staff-signup-submit-area button {
+  min-height: 50px;
+  padding: 13px 24px;
+
+  border: 1px solid #78dc77;
+  border-radius: 999px;
+
+  background: #78dc77;
+  color: #00390a;
+
+  font-weight: 900;
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.staff-signup-submit-area button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px
+    rgb(120 220 119 / 23%);
+}
+
+.staff-signup-submit-area button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+  transform: none;
+}
+
+.player-signup-option {
+  margin-top: 24px;
+  padding: 20px 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border:
+    1px dashed
+    rgb(120 220 119 / 35%);
+
+  border-radius: 14px;
+
+  background:
+    rgb(120 220 119 / 5%);
+}
+
+.player-signup-option strong {
+  color: #ffffff;
+}
+
+.player-signup-option p {
+  margin: 5px 0 0;
+  color: #98a496;
+}
+
+.player-signup-option > a {
+  flex: 0 0 auto;
+
+  padding: 11px 18px;
+
+  border:
+    1px solid #78dc77;
+
+  border-radius: 999px;
+
+  color: #78dc77;
+  font-weight: 800;
+}
+
+.player-signup-option > a:hover {
+  background:
+    rgb(120 220 119 / 12%);
+}
+
+@media (max-width: 720px) {
+  .staff-signup-page {
+    padding:
+      105px 15px 55px;
+  }
+
+  .staff-signup-back-link {
+    top: 22px;
+    left: 18px;
+  }
+
+  .staff-signup-card {
+    padding: 27px 18px;
+  }
+
+  .staff-signup-header {
+    flex-direction: column;
+  }
+
+  .staff-role-grid,
+  .staff-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .staff-form-group.full-width {
+    grid-column: auto;
+  }
+
+  .staff-signup-submit-area,
+  .player-signup-option {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .staff-signup-submit-area button,
+  .player-signup-option > a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
