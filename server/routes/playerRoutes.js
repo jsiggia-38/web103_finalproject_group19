@@ -6,10 +6,21 @@ import {
   deletePlayerProfile,
 } from "../controllers/playerController.js";
 
+import {
+  authenticateUser,
+} from "../middleware/authMiddleware.js";
+
+import {
+  authorizePlayerOwner,
+} from "../middleware/playerOwnershipMiddleware.js";
+
 const router = express.Router();
 
 /**
- * GET /api/players/:playerId
+ * Public profile request.
+ *
+ * Coaches, organizers, players, and homepage
+ * visitors can view a player profile.
  */
 router.get(
   "/:playerId",
@@ -17,20 +28,23 @@ router.get(
 );
 
 /**
- * PATCH /api/players/:playerId
+ * Only the authenticated profile owner can edit.
  */
 router.patch(
   "/:playerId",
+  authenticateUser,
+  authorizePlayerOwner,
   updatePlayerProfile,
 );
 
 /**
- * DELETE /api/players/:playerId
+ * Only the authenticated profile owner can delete.
  */
 router.delete(
   "/:playerId",
+  authenticateUser,
+  authorizePlayerOwner,
   deletePlayerProfile,
 );
-
 
 export default router;
