@@ -47,11 +47,11 @@ CORS
 
 ## Features
 
-### ✅ Database Reset
-The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
+### ✅ Home Page
 
+Modern landing page introducing the platform and highlighting featured players, featured teams, and the player recruitment process.
 
-<img width="1920" height="1020" alt="Database" src="https://github.com/user-attachments/assets/38aa28fb-a212-442f-a259-2eba8a590240" />
+homepage.gif
 
 
 ## Player Identity and Profile Verification (Custom 1)
@@ -76,6 +76,42 @@ This feature uses simulated verification records for demonstration purposes and 
 <img src="./client/public/images/Player%20Verification%207.gif"
      alt="Player Verification Demo"
      width="900">
+
+### Complete Player Registration
+
+Verified football information is automatically locked after identity verification. Players only complete their account information, biography, profile image, and availability before creating their account.
+
+<img src="./client/public/images/Player%20Complete%202.gif"
+     alt="Player Verification Demo"
+     width="900">
+
+### Dynamic Player Profiles
+
+Every registered student player receives a dedicated public profile page after completing the verification and registration process.
+
+Each profile automatically combines verified football information from the demo player registry with the player's own profile details, creating a trusted scouting profile that coaches can evaluate.
+
+The profile displays:
+
+- Verified player badge
+- Profile image
+- Biography
+- Career statistics
+- Playing position
+- Preferred foot
+- Skill level
+- Availability
+- Class year
+- Scouting status
+- Team assignment
+- Recent tryout invitations
+
+Team captains and coaches can also perform recruitment actions directly from the profile by:
+
+- Adding players to their Scout List
+- Sending Tryout Invitations
+
+<img width="1920" height="1018" alt="Player 1" src="https://github.com/user-attachments/assets/36cdca39-7e91-4d7c-af64-96c545ba91e5" />
 
 ### Search, Filter, and Sort Players(Custom 2)
 Search for players and quickly filter them by:
@@ -127,8 +163,8 @@ Class year is required.
 Goals cannot be negative.
 Assists cannot be negative.
 
-### Dynamic Player Pages
-Each player has a dedicated profile page displaying their complete football profile, statistics, and scouting information.
+
+
 
 ### Responsive User Interface
 The application is fully responsive and optimized for desktop, tablet, and mobile devices.
@@ -137,6 +173,11 @@ The application is fully responsive and optimized for desktop, tablet, and mobil
 ### AI Assistant(Custom 4)
 An AI assistant that helps the user accomplish their tasks.  
 
+### ✅ Database Reset
+The backend includes a database reset feature that restores the application to its default state with sample teams, coaches, players, and scouting records.
+
+
+<img width="1920" height="1020" alt="Database" src="https://github.com/user-attachments/assets/38aa28fb-a212-442f-a259-2eba8a590240" />
 
 
 
