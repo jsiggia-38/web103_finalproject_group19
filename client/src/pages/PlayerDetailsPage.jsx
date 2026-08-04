@@ -1,8 +1,418 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
+import { getPlayerById } from "../services/playerService.js";
+
+import "../styles/playerDetails.css";
+
+const DEFAULT_PLAYER_IMAGE =
+  "/images/default-player-avatar.png";
+
 function PlayerDetailsPage() {
+  const { playerId } = useParams();
+
+  const [player, setPlayer] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    const loadPlayer = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const result = await getPlayerById(playerId);
+
+        setPlayer(result.data);
+      } catch (requestError) {
+        setError(
+          requestError.message ||
+            "Unable to load the player profile.",
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPlayer();
+  }, [playerId]);
+
+  if (loading) {
+    return (
+      <main className="player-details-state-page">
+        <section className="player-details-state-card">
+          <div className="player-loading-spinner" />
+
+          <h1>Loading Player Profile</h1>
+
+          <p>
+            Retrieving verified player information.
+          </p>
+        </section>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="player-details-state-page">
+        <section className="player-details-state-card">
+          <h1>Unable to Load Player</h1>
+
+          <p className="player-details-error">
+            {error}
+          </p>
+
+          <Link
+            to="/players"
+            className="player-state-link"
+          >
+            Browse Players
+          </Link>
+        </section>
+      </main>
+    );
+  }
+
+  if (!player) {
+    return (
+      <main className="player-details-state-page">
+        <section className="player-details-state-card">
+          <h1>Player Not Found</h1>
+
+          <p>
+            The requested player profile does not
+            exist.
+          </p>
+
+          <Link
+            to="/players"
+            className="player-state-link"
+          >
+            Browse Players
+          </Link>
+        </section>
+      </main>
+    );
+  }
+
+  const playerImage =
+    !imageError && player.profileImage
+      ? player.profileImage
+      : DEFAULT_PLAYER_IMAGE;
+
   return (
-    <div>
-      <h1>Player Details</h1>
-    </div>
+    <main className="player-details-page">
+      <div className="player-details-container">
+        <Link
+          to="/players"
+          className="player-details-back-link"
+        >
+          <span>←</span>
+          Back to Players
+        </Link>
+
+        <section className="player-profile-hero">
+          <div className="player-profile-image-wrapper">
+            <img
+              src={playerImage}
+              alt={`${player.firstName} ${player.lastName}`}
+              className="player-profile-image"
+              onError={() => setImageError(true)}
+            />
+
+            {player.isVerified && (
+              <span className="player-image-verified-badge">
+                ✓ Verified
+              </span>
+            )}
+          </div>
+
+          <div className="player-profile-introduction">
+            <p className="player-profile-eyebrow">
+              Verified Soccer Player
+            </p>
+
+            <div className="player-name-row">
+              <h1>
+                {player.firstName}{" "}
+                <span>{player.lastName}</span>
+              </h1>
+
+              {player.isVerified && (
+                <span className="player-verified-label">
+                  ✓ Verified Profile
+                </span>
+              )}
+            </div>
+
+            <p className="player-profile-summary">
+              {player.primaryPosition}
+              {" • "}
+              {player.classYear}
+              {" • "}
+              {player.skillLevel}
+            </p>
+
+            <div className="player-profile-tags">
+              <span>
+                ⚽ {player.primaryPosition}
+              </span>
+
+              <span>
+                Preferred Foot:{" "}
+                {player.preferredFoot}
+              </span>
+
+              <span
+                className={`availability-tag availability-${player.availability
+                  ?.toLowerCase()
+                  .replaceAll(" ", "-")}`}
+              >
+                {player.availability}
+              </span>
+            </div>
+
+            <div className="player-profile-actions">
+              <button
+                type="button"
+                className="player-primary-action"
+                onClick={() => {
+                  alert(
+                    "The Scout List feature will be connected in the next phase.",
+                  );
+                }}
+              >
+                Add to Scout List
+              </button>
+
+              <button
+                type="button"
+                className="player-secondary-action"
+                onClick={() => {
+                  alert(
+                    "The Tryout Invitation feature will be connected in a later phase.",
+                  );
+                }}
+              >
+                Invite to Tryout
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section className="player-statistics-section">
+          <div className="player-section-heading">
+            <div>
+              <p>Performance</p>
+              <h2>Career Statistics</h2>
+            </div>
+
+            <span>
+              Verified registry statistics
+            </span>
+          </div>
+
+          <div className="player-statistics-grid">
+            <article>
+              <strong>
+                {player.statistics.goals}
+              </strong>
+              <span>Goals</span>
+            </article>
+
+            <article>
+              <strong>
+                {player.statistics.assists}
+              </strong>
+              <span>Assists</span>
+            </article>
+
+            <article>
+              <strong>
+                {player.statistics.cleanSheets}
+              </strong>
+              <span>Clean Sheets</span>
+            </article>
+
+            <article>
+              <strong>
+                {player.statistics.gamesPlayed}
+              </strong>
+              <span>Games Played</span>
+            </article>
+          </div>
+        </section>
+
+        <div className="player-details-content-grid">
+          <section className="player-details-panel">
+            <div className="player-section-heading compact">
+              <div>
+                <p>About</p>
+                <h2>Player Biography</h2>
+              </div>
+            </div>
+
+            <p className="player-biography">
+              {player.biography ||
+                "This player has not added a biography yet."}
+            </p>
+          </section>
+
+          <section className="player-details-panel">
+            <div className="player-section-heading compact">
+              <div>
+                <p>Registry</p>
+                <h2>
+                  Verified Soccer Information
+                </h2>
+              </div>
+
+              <span className="locked-information-label">
+                🔒 Locked
+              </span>
+            </div>
+
+            <div className="player-information-list">
+              <div>
+                <span>Primary Position</span>
+                <strong>
+                  {player.primaryPosition}
+                </strong>
+              </div>
+
+              <div>
+                <span>Secondary Position</span>
+                <strong>
+                  {player.secondaryPosition ||
+                    "None"}
+                </strong>
+              </div>
+
+              <div>
+                <span>Preferred Foot</span>
+                <strong>
+                  {player.preferredFoot}
+                </strong>
+              </div>
+
+              <div>
+                <span>Skill Level</span>
+                <strong>
+                  {player.skillLevel}
+                </strong>
+              </div>
+
+              <div>
+                <span>Class Year</span>
+                <strong>
+                  {player.classYear}
+                </strong>
+              </div>
+
+              <div>
+                <span>Verification</span>
+                <strong>
+                  {player.isVerified
+                    ? "Verified"
+                    : "Not Verified"}
+                </strong>
+              </div>
+            </div>
+          </section>
+
+          <section className="player-details-panel">
+            <div className="player-section-heading compact">
+              <div>
+                <p>Recruitment</p>
+                <h2>Scouting Status</h2>
+              </div>
+            </div>
+
+            <div className="scouting-empty-state">
+              <span>☆</span>
+
+              <div>
+                <h3>
+                  No Scouting Activity Yet
+                </h3>
+
+                <p>
+                  Team interest, scouting status,
+                  and recruitment progress will
+                  appear here.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="player-details-panel">
+            <div className="player-section-heading compact">
+              <div>
+                <p>Team Details</p>
+                <h2>
+                  Current Team and Availability
+                </h2>
+              </div>
+            </div>
+
+            <div className="player-team-information">
+              <div>
+                <span>Current Team</span>
+
+                <strong>
+                  {player.team
+                    ? player.team.teamName
+                    : "Unassigned"}
+                </strong>
+              </div>
+
+              <div>
+                <span>Division</span>
+
+                <strong>
+                  {player.team?.division ||
+                    "Not assigned"}
+                </strong>
+              </div>
+
+              <div>
+                <span>Availability</span>
+
+                <strong>
+                  {player.availability}
+                </strong>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section className="player-invitations-section">
+          <div className="player-section-heading">
+            <div>
+              <p>Recruitment</p>
+              <h2>
+                Recent Tryout Invitations
+              </h2>
+            </div>
+          </div>
+
+          <div className="player-invitations-empty">
+            <span>📅</span>
+
+            <div>
+              <h3>No Invitations Yet</h3>
+
+              <p>
+                Tryout invitations sent by teams
+                will appear in this section.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
 

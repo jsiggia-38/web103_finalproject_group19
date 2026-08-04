@@ -7,6 +7,7 @@ import {
 import HomePage from './pages/HomePage.jsx'
 import PlayerVerificationPage from './pages/PlayerVerificationPage.jsx'
 import CompletePlayerProfilePage from './pages/CompletePlayerProfilePage.jsx'
+import PlayerDetailsPage from "./pages/PlayerDetailsPage.jsx";
 
 function App() {
   return (
@@ -26,7 +27,13 @@ function App() {
           path="/signup/player-profile"
           element={<CompletePlayerProfilePage />}
         />
+         <Route
+         path="/players/:playerId"
+         element={<PlayerDetailsPage />}
+      />
       </Routes>
+
+     
     </BrowserRouter>
   )
 }
