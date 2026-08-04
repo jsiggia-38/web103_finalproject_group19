@@ -141,11 +141,10 @@ function CompletePlayerProfilePage() {
     return (
       <main className="profile-access-page">
         <section className="profile-access-card">
-          <h1>Verification Required</h1>
+          <h1>Verification Successful</h1>
 
           <p>
-            You must verify your player identity before completing a player
-            profile.
+            You would be directed to your player profile shortly.
           </p>
 
           <Link
