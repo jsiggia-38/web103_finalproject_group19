@@ -1,6 +1,6 @@
 import {
   Navigate,
-  useLocation,
+  useParams,
 } from "react-router-dom";
 
 const getAuthenticatedUser = () => {
@@ -19,23 +19,14 @@ const getAuthenticatedUser = () => {
       error,
     );
 
-    sessionStorage.removeItem(
-      "authenticatedUser",
-    );
-
-    sessionStorage.removeItem(
-      "authToken",
-    );
-
     return null;
   }
 };
 
-function ProtectedRoute({
+function PlayerOwnerRoute({
   children,
-  allowedRoles = [],
 }) {
-  const location = useLocation();
+  const { playerId } = useParams();
 
   const authToken =
     sessionStorage.getItem("authToken");
@@ -47,29 +38,14 @@ function ProtectedRoute({
       <Navigate
         to="/login"
         replace
-        state={{
-          from: location.pathname,
-        }}
       />
     );
   }
 
   if (
-    allowedRoles.length > 0 &&
-    !allowedRoles.includes(user.role)
+    user.role !== "Player" ||
+    !user.playerId
   ) {
-    if (
-      user.role === "Player" &&
-      user.playerId
-    ) {
-      return (
-        <Navigate
-          to={`/players/${user.playerId}`}
-          replace
-        />
-      );
-    }
-
     if (user.role === "Coach") {
       return (
         <Navigate
@@ -96,7 +72,19 @@ function ProtectedRoute({
     );
   }
 
+  if (
+    Number(playerId) !==
+    Number(user.playerId)
+  ) {
+    return (
+      <Navigate
+        to={`/players/${user.playerId}`}
+        replace
+      />
+    );
+  }
+
   return children;
 }
 
-export default ProtectedRoute;
+export default PlayerOwnerRoute;

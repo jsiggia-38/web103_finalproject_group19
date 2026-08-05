@@ -1,0 +1,422 @@
+.scout-list-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 34px 24px 90px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgb(120 220 119 / 8%),
+      transparent 35%
+    ),
+    #071009;
+
+  color: #ffffff;
+}
+
+.scout-list-container {
+  width: min(100%, 1250px);
+  margin: 0 auto;
+}
+
+.scout-list-topbar {
+  margin-bottom: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.scout-list-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+}
+
+.scout-list-brand-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border: 2px solid #78dc77;
+  border-radius: 13px;
+
+  background: rgb(120 220 119 / 9%);
+}
+
+.scout-list-brand strong,
+.scout-list-brand small {
+  display: block;
+}
+
+.scout-list-brand small {
+  color: #78dc77;
+  font-weight: 900;
+}
+
+.scout-list-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.scout-list-user-actions > span {
+  color: #becab9;
+  font-weight: 700;
+}
+
+.scout-list-user-actions a,
+.scout-list-user-actions button {
+  min-height: 43px;
+  padding: 11px 17px;
+
+  border: 1px solid
+    rgb(255 255 255 / 26%);
+  border-radius: 999px;
+
+  background: transparent;
+  color: #ffffff;
+
+  font-weight: 900;
+}
+
+.scout-list-user-actions button {
+  border-color: #78dc77;
+  background: #78dc77;
+  color: #00390a;
+  cursor: pointer;
+}
+
+.scout-list-hero {
+  padding: 42px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+
+  border: 1px solid
+    rgb(120 220 119 / 34%);
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #08140c,
+      #0a1810
+    );
+}
+
+.scout-list-hero > div > p:first-child {
+  color: #78dc77;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.scout-list-hero h1 {
+  margin: 10px 0;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(2.6rem, 6vw, 4.8rem);
+}
+
+.scout-list-hero h1 span {
+  color: #78dc77;
+}
+
+.scout-list-hero > div > p:last-child {
+  color: #becab9;
+  line-height: 1.7;
+}
+
+.scout-list-count {
+  height: fit-content;
+  padding: 9px 15px;
+
+  border-radius: 999px;
+
+  background:
+    rgb(120 220 119 / 13%);
+  color: #78dc77;
+
+  font-weight: 900;
+}
+
+.scout-list-grid {
+  margin-top: 25px;
+  display: grid;
+  gap: 22px;
+}
+
+.scout-list-card {
+  padding: 27px;
+
+  border: 1px solid
+    rgb(120 220 119 / 19%);
+  border-radius: 19px;
+
+  background: #0b1610;
+}
+
+.scout-list-player-summary {
+  display: grid;
+  grid-template-columns: 175px 1fr;
+  gap: 24px;
+}
+
+.scout-list-player-summary img {
+  width: 175px;
+  height: 190px;
+
+  object-fit: cover;
+
+  border: 1px solid
+    rgb(120 220 119 / 35%);
+  border-radius: 14px;
+}
+
+.scout-list-verified {
+  color: #78dc77;
+  font-weight: 900;
+}
+
+.scout-list-player-summary h2 {
+  margin: 10px 0 7px;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+}
+
+.scout-list-player-summary h2 span {
+  color: #78dc77;
+}
+
+.scout-list-player-summary p {
+  color: #becab9;
+}
+
+.scout-list-player-stats {
+  margin-top: 20px;
+
+  display: flex;
+  gap: 14px;
+}
+
+.scout-list-player-stats span {
+  min-width: 90px;
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #111f15;
+  color: #98a496;
+
+  text-align: center;
+}
+
+.scout-list-player-stats strong {
+  display: block;
+
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.scout-list-form {
+  margin-top: 24px;
+
+  display: grid;
+  grid-template-columns:
+    240px 1fr;
+  gap: 18px;
+}
+
+.scout-list-form > div {
+  display: grid;
+  gap: 8px;
+}
+
+.scout-list-form label {
+  font-weight: 800;
+}
+
+.scout-list-form select,
+.scout-list-form textarea {
+  width: 100%;
+  padding: 13px 14px;
+
+  border: 1px solid #526151;
+  border-radius: 9px;
+
+  background: #17221a;
+  color: #ffffff;
+}
+
+.scout-list-form textarea {
+  resize: vertical;
+}
+
+.scout-list-form select:focus,
+.scout-list-form textarea:focus {
+  border-color: #78dc77;
+  outline: none;
+}
+
+.scout-list-card-actions {
+  margin-top: 21px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 11px;
+}
+
+.scout-list-card-actions a,
+.scout-list-card-actions button {
+  min-height: 45px;
+  padding: 11px 18px;
+
+  border-radius: 999px;
+
+  font-weight: 900;
+}
+
+.scout-list-card-actions a {
+  border: 1px solid
+    rgb(255 255 255 / 27%);
+  color: #ffffff;
+}
+
+.scout-list-card-actions button {
+  border: 1px solid #78dc77;
+  background: #78dc77;
+  color: #00390a;
+  cursor: pointer;
+}
+
+.scout-list-card-actions
+.scout-list-remove-button {
+  border-color: #ff6b6b;
+  background: transparent;
+  color: #ff9c9c;
+}
+
+.scout-list-success,
+.scout-list-error {
+  margin-top: 22px;
+  padding: 13px 15px;
+
+  border-radius: 9px;
+  font-weight: 800;
+}
+
+.scout-list-success {
+  background:
+    rgb(120 220 119 / 12%);
+  color: #78dc77;
+}
+
+.scout-list-error {
+  background:
+    rgb(147 0 10 / 18%);
+  color: #ffb4ab;
+}
+
+.scout-list-state {
+  margin-top: 26px;
+  padding: 60px 25px;
+
+  border: 1px dashed
+    rgb(120 220 119 / 27%);
+  border-radius: 18px;
+
+  background: #0b1610;
+  text-align: center;
+}
+
+.scout-list-state > span {
+  font-size: 3rem;
+}
+
+.scout-list-state p {
+  color: #98a496;
+}
+
+.scout-list-state a {
+  display: inline-flex;
+
+  margin-top: 15px;
+  padding: 12px 21px;
+
+  border-radius: 999px;
+
+  background: #78dc77;
+  color: #00390a;
+
+  font-weight: 900;
+}
+
+.scout-list-spinner {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 18px;
+
+  border: 4px solid
+    rgb(120 220 119 / 18%);
+  border-top-color: #78dc77;
+  border-radius: 50%;
+
+  animation:
+    scout-list-spin
+    800ms linear infinite;
+}
+
+@keyframes scout-list-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .scout-list-page {
+    padding: 22px 15px 60px;
+  }
+
+  .scout-list-topbar,
+  .scout-list-hero {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .scout-list-user-actions {
+    flex-wrap: wrap;
+  }
+
+  .scout-list-player-summary,
+  .scout-list-form {
+    grid-template-columns: 1fr;
+  }
+
+  .scout-list-player-summary img {
+    width: 100%;
+    height: 320px;
+  }
+
+  .scout-list-card-actions {
+    flex-direction: column;
+  }
+
+  .scout-list-card-actions a,
+  .scout-list-card-actions button {
+    width: 100%;
+    text-align: center;
+  }
+}

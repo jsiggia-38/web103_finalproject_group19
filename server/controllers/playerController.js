@@ -1,8 +1,147 @@
 import {
+  getPlayers as getPlayersFromDatabase,
   getPlayerById as getPlayerByIdFromDatabase,
   updatePlayerProfile as updatePlayerProfileInDatabase,
   deletePlayerAccount as deletePlayerAccountFromDatabase,
+  getPlayerScoutingActivity as getPlayerScoutingActivityFromDatabase,
 } from "../models/playerModel.js";
+
+
+/**
+ * GET /api/players
+ *
+ * Retrieves registered players for browsing,
+ * searching, filtering, and sorting.
+ */
+const getPlayers = async (req, res) => {
+  try {
+    const {
+      search = "",
+      position = "",
+      classYear = "",
+      skillLevel = "",
+      availability = "",
+      sortBy = "newest",
+      sortOrder = "desc",
+    } = req.query;
+
+    const allowedSortValues = [
+      "newest",
+      "name",
+      "goals",
+      "assists",
+      "gamesPlayed",
+      "skillLevel",
+    ];
+
+    if (
+      !allowedSortValues.includes(sortBy)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Choose a valid player sorting option.",
+      });
+    }
+
+    const players =
+      await getPlayersFromDatabase({
+        search:
+          typeof search === "string"
+            ? search.trim()
+            : "",
+        position:
+          typeof position === "string"
+            ? position.trim()
+            : "",
+        classYear:
+          typeof classYear === "string"
+            ? classYear.trim()
+            : "",
+        skillLevel:
+          typeof skillLevel === "string"
+            ? skillLevel.trim()
+            : "",
+        availability:
+          typeof availability === "string"
+            ? availability.trim()
+            : "",
+        sortBy,
+        sortOrder:
+          sortOrder === "asc"
+            ? "asc"
+            : "desc",
+      });
+
+    return res.status(200).json({
+      success: true,
+      count: players.length,
+      filters: {
+        search,
+        position,
+        classYear,
+        skillLevel,
+        availability,
+        sortBy,
+        sortOrder:
+          sortOrder === "asc"
+            ? "asc"
+            : "desc",
+      },
+      data: players.map((player) => ({
+        playerId: player.player_id,
+        firstName: player.first_name,
+        lastName: player.last_name,
+        profileImage:
+          player.profile_image,
+
+        primaryPosition:
+          player.primary_position,
+        secondaryPosition:
+          player.secondary_position,
+        preferredFoot:
+          player.preferred_foot,
+        classYear: player.class_year,
+        skillLevel: player.skill_level,
+        availability:
+          player.availability,
+
+        isVerified: player.is_verified,
+
+        team: player.team_id
+          ? {
+              teamId: player.team_id,
+              teamName: player.team_name,
+            }
+          : null,
+
+        statistics: {
+          goals: Number(player.goals),
+          assists: Number(player.assists),
+          cleanSheets: Number(
+            player.clean_sheets,
+          ),
+          gamesPlayed: Number(
+            player.games_played,
+          ),
+        },
+
+        createdAt: player.created_at,
+      })),
+    });
+  } catch (error) {
+    console.error(
+      "Unable to retrieve players:",
+      error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message:
+        "An unexpected error occurred while retrieving players.",
+    });
+  }
+};
 
 /**
  * GET /api/players/:playerId
@@ -259,8 +398,81 @@ const deletePlayerProfile = async (req, res) => {
   }
 };
 
+/**
+ * GET /api/players/:playerId/recruitment
+ *
+ * Returns recruitment information visible to the
+ * authenticated owner of the player profile.
+ */
+const getPlayerRecruitmentActivity = async (
+  req,
+  res,
+) => {
+  try {
+    const playerId = Number(
+      req.params.playerId,
+    );
+
+    if (
+      !Number.isInteger(playerId) ||
+      playerId <= 0
+    ) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "The player ID must be a valid positive integer.",
+      });
+    }
+
+    const scoutingActivity =
+      await getPlayerScoutingActivityFromDatabase(
+        playerId,
+      );
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        scoutingActivity:
+          scoutingActivity.map((entry) => ({
+            scoutId: entry.scout_id,
+
+            status:
+              entry.status ||
+              "Interested",
+
+            dateAdded:
+              entry.date_added,
+
+            updatedAt:
+              entry.updated_at,
+
+            team: {
+              teamId: entry.team_id,
+              teamName: entry.team_name,
+              division: entry.division,
+              logoUrl: entry.logo_url,
+            },
+          })),
+      },
+    });
+  } catch (error) {
+    console.error(
+      "Unable to retrieve player recruitment activity:",
+      error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message:
+        "An unexpected error occurred while retrieving recruitment activity.",
+    });
+  }
+};
+
 export {
+  getPlayers,
   getPlayerById,
   updatePlayerProfile,
   deletePlayerProfile,
+  getPlayerRecruitmentActivity,
 };

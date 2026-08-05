@@ -6,6 +6,9 @@ import authRoutes from './routes/authRoutes.js'
 
 import playerRoutes from "./routes/playerRoutes.js";
 
+import scoutListRoutes from "./routes/scoutListRoutes.js";
+import teamRoutes from "./routes/teamRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 const app = express()
 
@@ -67,6 +70,20 @@ app.use(
   playerRoutes,
 );
 
+app.use(
+  "/api/scout-list",
+  scoutListRoutes,
+);
+
+app.use(
+  "/api/teams",
+  teamRoutes,
+);
+
+app.use(
+  "/api/dashboard",
+  dashboardRoutes,
+);
 
 const PORT = process.env.PORT || 3001
 

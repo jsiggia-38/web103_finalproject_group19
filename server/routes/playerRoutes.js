@@ -1,9 +1,11 @@
 import express from "express";
 
 import {
+  getPlayers,
   getPlayerById,
   updatePlayerProfile,
   deletePlayerProfile,
+  getPlayerRecruitmentActivity,
 } from "../controllers/playerController.js";
 
 import {
@@ -17,10 +19,26 @@ import {
 const router = express.Router();
 
 /**
- * Public profile request.
- *
- * Coaches, organizers, players, and homepage
- * visitors can view a player profile.
+ * Only the authenticated player owner can view
+ * private recruitment activity.
+ */
+router.get(
+  "/:playerId/recruitment",
+  authenticateUser,
+  authorizePlayerOwner,
+  getPlayerRecruitmentActivity,
+);
+
+/**
+ * Browse all registered players.
+ */
+router.get(
+  "/",
+  getPlayers,
+);
+
+/**
+ * View one public player profile.
  */
 router.get(
   "/:playerId",

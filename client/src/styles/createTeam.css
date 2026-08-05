@@ -1,0 +1,421 @@
+.create-team-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 34px 24px 90px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgb(120 220 119 / 8%),
+      transparent 35%
+    ),
+    #071009;
+
+  color: #ffffff;
+}
+
+.create-team-container {
+  width: min(100%, 1050px);
+  margin: 0 auto;
+}
+
+.create-team-topbar {
+  margin-bottom: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.create-team-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+}
+
+.create-team-brand-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border: 2px solid #78dc77;
+  border-radius: 13px;
+
+  background: rgb(120 220 119 / 9%);
+  font-size: 1.45rem;
+}
+
+.create-team-brand strong,
+.create-team-brand small {
+  display: block;
+}
+
+.create-team-brand strong {
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+
+.create-team-brand small {
+  margin-top: 2px;
+
+  color: #78dc77;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.create-team-dashboard-link {
+  min-height: 43px;
+  padding: 11px 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid
+    rgb(255 255 255 / 26%);
+
+  border-radius: 999px;
+
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.create-team-dashboard-link:hover {
+  border-color: #78dc77;
+  color: #78dc77;
+}
+
+.create-team-card {
+  padding: 42px;
+
+  border: 1px solid
+    rgb(120 220 119 / 39%);
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgb(8 19 12 / 98%),
+      rgb(10 23 15 / 97%)
+    );
+
+  box-shadow:
+    0 30px 85px rgb(0 0 0 / 52%);
+}
+
+.create-team-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+
+  padding-bottom: 30px;
+
+  border-bottom: 1px solid
+    rgb(120 220 119 / 15%);
+}
+
+.create-team-header-icon {
+  flex: 0 0 auto;
+
+  width: 68px;
+  height: 68px;
+
+  display: grid;
+  place-items: center;
+
+  border: 3px solid #78dc77;
+  border-radius: 18px;
+
+  background:
+    rgb(120 220 119 / 8%);
+
+  font-size: 2rem;
+}
+
+.create-team-eyebrow {
+  margin: 0 0 8px;
+
+  color: #78dc77;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.create-team-header h1 {
+  margin: 0 0 10px;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(2rem, 5vw, 3.4rem);
+
+  line-height: 1.05;
+}
+
+.create-team-header h1 span {
+  color: #78dc77;
+}
+
+.create-team-header p:last-child {
+  margin: 0;
+
+  color: #becab9;
+  line-height: 1.7;
+}
+
+.create-team-form {
+  margin-top: 25px;
+}
+
+.create-team-form-section {
+  padding: 28px;
+
+  border: 1px solid
+    rgb(190 202 185 / 13%);
+
+  border-radius: 17px;
+
+  background:
+    rgb(11 21 14 / 88%);
+}
+
+.create-team-form-section +
+.create-team-form-section {
+  margin-top: 20px;
+}
+
+.create-team-section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.create-team-section-heading > span {
+  flex: 0 0 auto;
+
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background:
+    rgb(120 220 119 / 13%);
+
+  color: #78dc77;
+  font-weight: 900;
+}
+
+.create-team-section-heading h2 {
+  margin: 0 0 6px;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+}
+
+.create-team-section-heading p {
+  margin: 0;
+  color: #98a496;
+}
+
+.create-team-form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.create-team-form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.create-team-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.create-team-form-group label {
+  color: #f4f6f3;
+  font-weight: 800;
+}
+
+.create-team-form-group input,
+.create-team-form-group textarea,
+.create-team-form-group select {
+  width: 100%;
+  padding: 14px 15px;
+
+  border: 1px solid #526151;
+  border-radius: 9px;
+
+  background: #1b241d;
+  color: #ffffff;
+
+  font: inherit;
+}
+
+.create-team-form-group textarea {
+  resize: vertical;
+}
+
+.create-team-form-group input:focus,
+.create-team-form-group textarea:focus,
+.create-team-form-group select:focus {
+  border-color: #78dc77;
+  outline: none;
+
+  box-shadow:
+    0 0 0 3px
+      rgb(120 220 119 / 14%);
+}
+
+.create-team-warning,
+.create-team-success,
+.create-team-error {
+  margin: 22px 0 0;
+  padding: 13px 15px;
+
+  border-radius: 9px;
+  font-weight: 800;
+}
+
+.create-team-warning {
+  border: 1px solid
+    rgb(255 200 87 / 40%);
+
+  background:
+    rgb(255 200 87 / 10%);
+
+  color: #ffd878;
+}
+
+.create-team-success {
+  border: 1px solid
+    rgb(120 220 119 / 42%);
+
+  background:
+    rgb(120 220 119 / 12%);
+
+  color: #78dc77;
+}
+
+.create-team-error {
+  border: 1px solid
+    rgb(255 107 107 / 42%);
+
+  background:
+    rgb(147 0 10 / 18%);
+
+  color: #ffb4ab;
+}
+
+.create-team-submit-area {
+  margin-top: 25px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 13px;
+}
+
+.create-team-cancel-button,
+.create-team-submit-button {
+  min-height: 49px;
+  padding: 13px 22px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  font-weight: 900;
+}
+
+.create-team-cancel-button {
+  border: 1px solid
+    rgb(255 255 255 / 28%);
+
+  color: #ffffff;
+}
+
+.create-team-submit-button {
+  border: 1px solid #78dc77;
+  background: #78dc77;
+  color: #00390a;
+
+  cursor: pointer;
+}
+
+.create-team-cancel-button:hover {
+  border-color: #78dc77;
+  color: #78dc77;
+}
+
+.create-team-submit-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px
+      rgb(120 220 119 / 22%);
+}
+
+.create-team-submit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+@media (max-width: 720px) {
+  .create-team-page {
+    padding: 22px 15px 60px;
+  }
+
+  .create-team-topbar,
+  .create-team-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .create-team-card {
+    padding: 27px 18px;
+  }
+
+  .create-team-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .create-team-form-group.full-width {
+    grid-column: auto;
+  }
+
+  .create-team-submit-area {
+    flex-direction: column-reverse;
+  }
+
+  .create-team-cancel-button,
+  .create-team-submit-button {
+    width: 100%;
+  }
+}

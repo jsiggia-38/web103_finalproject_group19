@@ -1,10 +1,14 @@
-  import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Link,
   useNavigate,
   useParams,
 } from "react-router-dom";
+
+import {
+  addPlayerToScoutList,
+} from "../services/scoutListService.js";
 
 import {
   deletePlayerProfile,
@@ -16,9 +20,44 @@ import "../styles/playerDetails.css";
 const DEFAULT_PLAYER_IMAGE =
   "/images/default-player-avatar.png";
 
+const getAuthenticatedUser = () => {
+  try {
+    const storedUser =
+      sessionStorage.getItem(
+        "authenticatedUser"
+      );
+
+    return storedUser
+      ? JSON.parse(storedUser)
+      : null;
+  } catch {
+    return null;
+  }
+};
+
 function PlayerDetailsPage() {
   const { playerId } = useParams();
   const navigate = useNavigate();
+
+  const authenticatedUser =
+  getAuthenticatedUser();
+
+  const isProfileOwner =
+  authenticatedUser?.role === "Player" &&
+  Number(authenticatedUser.playerId) ===
+    Number(playerId);
+
+  const [addingToScoutList, setAddingToScoutList] =
+  useState(false);
+
+const [scoutListSuccess, setScoutListSuccess] =
+  useState("");
+
+const [scoutListError, setScoutListError] =
+  useState("");
+
+const [isAddedToScoutList, setIsAddedToScoutList] =
+  useState(false);
 
   const [player, setPlayer] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -42,6 +81,40 @@ const handleLogout = () => {
   navigate("/login", {
     replace: true,
   });
+};
+
+const handleAddToScoutList = async () => {
+  try {
+    setAddingToScoutList(true);
+    setScoutListSuccess("");
+    setScoutListError("");
+
+    const result =
+      await addPlayerToScoutList({
+        playerId: Number(playerId),
+        status: "Interested",
+        scoutingNotes: "",
+      });
+
+    setScoutListSuccess(result.message);
+    setIsAddedToScoutList(true);
+  } catch (requestError) {
+    const message =
+      requestError.message ||
+      "Unable to add this player to your scout list.";
+
+    setScoutListError(message);
+
+    if (
+      message
+        .toLowerCase()
+        .includes("already on your scout list")
+    ) {
+      setIsAddedToScoutList(true);
+    }
+  } finally {
+    setAddingToScoutList(false);
+  }
 };
 
 const handleDeleteProfile = async () => {
@@ -175,26 +248,75 @@ const handleDeleteProfile = async () => {
     </span>
   </Link>
 
-  <div className="player-dashboard-user-actions">
-    <span className="player-dashboard-user-name">
-      {player.firstName} {player.lastName}
-    </span>
+ <div className="player-dashboard-user-actions">
+  {authenticatedUser ? (
+    <>
+      <span className="player-dashboard-user-name">
+        {authenticatedUser.firstName}{" "}
+        {authenticatedUser.lastName}
+      </span>
 
-    <Link
-      to="/"
-      className="player-dashboard-home-link"
-    >
-      Home
-    </Link>
+      {authenticatedUser.role === "Coach" && (
+        <Link
+          to="/dashboard/coach"
+          className="player-dashboard-home-link"
+        >
+          Dashboard
+        </Link>
+      )}
 
-    <button
-      type="button"
-      className="player-dashboard-logout-button"
-      onClick={handleLogout}
-    >
-      Log Out
-    </button>
-  </div>
+      {authenticatedUser.role === "Organizer" && (
+        <Link
+          to="/dashboard/organizer"
+          className="player-dashboard-home-link"
+        >
+          Dashboard
+        </Link>
+      )}
+
+      {authenticatedUser.role === "Player" &&
+        authenticatedUser.playerId && (
+          <Link
+            to={`/players/${authenticatedUser.playerId}`}
+            className="player-dashboard-home-link"
+          >
+            Dashboard
+          </Link>
+        )}
+
+      <Link
+        to="/"
+        className="player-dashboard-home-link"
+      >
+        Home
+      </Link>
+
+      <button
+        type="button"
+        className="player-dashboard-logout-button"
+        onClick={handleLogout}
+      >
+        Log Out
+      </button>
+    </>
+  ) : (
+    <>
+      <Link
+        to="/players"
+        className="player-dashboard-home-link"
+      >
+        Continue Browsing Players
+      </Link>
+
+      <Link
+        to="/"
+        className="player-dashboard-home-link"
+      >
+        Back Home
+      </Link>
+    </>
+  )}
+</div>
 </header>
 
         <section className="player-profile-hero">
@@ -258,26 +380,64 @@ const handleDeleteProfile = async () => {
               </span>
             </div>
 
-            <div className="player-profile-actions">
-  <Link
-    to={`/players/${player.playerId}/edit`}
-    className="player-edit-action"
-  >
-    Edit Profile
-  </Link>
+            {isProfileOwner && (
+  <div className="player-profile-actions">
+    <Link
+      to={`/players/${player.playerId}/edit`}
+      className="player-edit-action"
+    >
+      Edit Profile
+    </Link>
 
-  <button
-    type="button"
-    className="player-delete-action"
-    onClick={() => {
-      setDeleteError("");
-      setShowDeleteModal(true);
-    }}
+    <button
+      type="button"
+      className="player-delete-action"
+      onClick={() => {
+        setDeleteError("");
+        setShowDeleteModal(true);
+      }}
+    >
+      Delete Profile
+    </button>
+  </div>
+)}
+{authenticatedUser?.role === "Coach" && (
+  <div className="player-profile-actions">
+    <button
+      type="button"
+      className="player-scout-action"
+      disabled={
+        addingToScoutList ||
+        isAddedToScoutList
+      }
+      onClick={handleAddToScoutList}
+    >
+      {addingToScoutList
+        ? "Adding to Scout List..."
+        : isAddedToScoutList
+          ? "Added to Scout List"
+          : "Add to Scout List"}
+    </button>
+  </div>
+)}
+
+{scoutListSuccess && (
+  <p
+    className="player-scout-success"
+    role="status"
   >
-    Delete Profile
-  </button>
-</div>
-              
+    {scoutListSuccess}
+  </p>
+)}
+
+{scoutListError && (
+  <p
+    className="player-scout-error"
+    role="alert"
+  >
+    {scoutListError}
+  </p>
+)}
           </div>
         </section>
 

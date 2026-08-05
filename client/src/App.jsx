@@ -13,6 +13,11 @@ import SignupPage from "./pages/SignupPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import CoachDashboardPage from "./pages/CoachDashboardPage.jsx";
 import OrganizerDashboardPage from "./pages/OrganizerDashboardPage.jsx";
+import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
+import PlayerOwnerRoute from "./components/auth/PlayerOwnerRoute.jsx";
+import PlayersPage from "./pages/PlayersPage.jsx";
+import CreateTeamPage from "./pages/CreateTeamPage.jsx";
+import ScoutListPage from "./pages/ScoutListPage.jsx";
 
 function App() {
   return (
@@ -38,9 +43,18 @@ function App() {
       />
 
       <Route
-         path="/players/:playerId/edit"
-         element={<EditPlayerPage />}
-      />
+  path="/players/:playerId/edit"
+  element={
+    <PlayerOwnerRoute>
+      <EditPlayerPage />
+    </PlayerOwnerRoute>
+  }
+/>
+
+<Route
+  path="/players"
+  element={<PlayersPage />}
+/>
       <Route
          path="/signup"
          element={<SignupPage />}
@@ -53,13 +67,49 @@ function App() {
 
 <Route
   path="/dashboard/coach"
-  element={<CoachDashboardPage />}
+  element={
+    <ProtectedRoute
+      allowedRoles={["Coach"]}
+    >
+      <CoachDashboardPage />
+    </ProtectedRoute>
+  }
 />
 
 <Route
   path="/dashboard/organizer"
-  element={<OrganizerDashboardPage />}
+  element={
+    <ProtectedRoute
+      allowedRoles={["Organizer"]}
+    >
+      <OrganizerDashboardPage />
+    </ProtectedRoute>
+  }
 />
+
+<Route
+  path="/teams/create"
+  element={
+    <ProtectedRoute
+      allowedRoles={["Organizer"]}
+    >
+      <CreateTeamPage />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/scout-list"
+  element={
+    <ProtectedRoute
+      allowedRoles={["Coach"]}
+    >
+      <ScoutListPage />
+    </ProtectedRoute>
+  }
+/>
+
+
       </Routes>
 
      

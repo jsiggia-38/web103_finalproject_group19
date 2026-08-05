@@ -1,7 +1,16 @@
 import {
+  useEffect,
+  useState,
+} from "react";
+
+import {
   Link,
   useNavigate,
 } from "react-router-dom";
+
+import {
+  getOrganizerDashboard,
+} from "../services/dashboardService.js";
 
 import "../styles/roleDashboard.css";
 
@@ -20,20 +29,95 @@ const getAuthenticatedUser = () => {
   }
 };
 
+const initialDashboardData = {
+  summary: {
+    totalTeams: 0,
+    verifiedPlayers: 0,
+    coaches: 0,
+    openInvitations: 0,
+  },
+  recentTeams: [],
+  recentPlayers: [],
+};
+
 function OrganizerDashboardPage() {
   const navigate = useNavigate();
   const user = getAuthenticatedUser();
+
+  const [dashboard, setDashboard] =
+    useState(initialDashboardData);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  const [error, setError] =
+    useState("");
+
+  useEffect(() => {
+    const loadDashboard = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const result =
+          await getOrganizerDashboard();
+
+        setDashboard(
+          result.data ||
+            initialDashboardData,
+        );
+      } catch (requestError) {
+        setError(
+          requestError.message ||
+            "Unable to load the Organizer dashboard.",
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDashboard();
+  }, []);
 
   const handleLogout = () => {
     sessionStorage.removeItem("authToken");
     sessionStorage.removeItem(
       "authenticatedUser",
     );
+    sessionStorage.removeItem(
+      "createdPlayerAccount",
+    );
 
     navigate("/login", {
       replace: true,
     });
   };
+
+  if (loading) {
+    return (
+      <main className="role-dashboard-page">
+        <div className="role-dashboard-container">
+          <section className="role-dashboard-loading-state">
+            <div className="role-dashboard-spinner" />
+
+            <h1>
+              Loading Organizer Dashboard
+            </h1>
+
+            <p>
+              Retrieving teams, coaches, and player
+              registration information.
+            </p>
+          </section>
+        </div>
+      </main>
+    );
+  }
+
+  const teamStatus =
+    dashboard.summary.totalTeams > 0
+      ? "Active"
+      : "Pending";
 
   return (
     <main className="role-dashboard-page">
@@ -81,6 +165,15 @@ function OrganizerDashboardPage() {
           </div>
         </header>
 
+        {error && (
+          <p
+            className="role-dashboard-error"
+            role="alert"
+          >
+            {error}
+          </p>
+        )}
+
         <section className="role-dashboard-hero">
           <div>
             <p className="role-dashboard-eyebrow">
@@ -111,7 +204,11 @@ function OrganizerDashboardPage() {
         <section className="role-dashboard-stats-grid">
           <article className="role-dashboard-stat-card">
             <span>Total Teams</span>
-            <strong>0</strong>
+
+            <strong>
+              {dashboard.summary.totalTeams}
+            </strong>
+
             <small>
               Registered soccer teams
             </small>
@@ -119,7 +216,12 @@ function OrganizerDashboardPage() {
 
           <article className="role-dashboard-stat-card">
             <span>Verified Players</span>
-            <strong>1</strong>
+
+            <strong>
+              {dashboard.summary
+                .verifiedPlayers}
+            </strong>
+
             <small>
               Registered verified players
             </small>
@@ -127,7 +229,11 @@ function OrganizerDashboardPage() {
 
           <article className="role-dashboard-stat-card">
             <span>Coaches</span>
-            <strong>1</strong>
+
+            <strong>
+              {dashboard.summary.coaches}
+            </strong>
+
             <small>
               Registered coach accounts
             </small>
@@ -135,7 +241,12 @@ function OrganizerDashboardPage() {
 
           <article className="role-dashboard-stat-card">
             <span>Open Invitations</span>
-            <strong>0</strong>
+
+            <strong>
+              {dashboard.summary
+                .openInvitations}
+            </strong>
+
             <small>
               Pending recruitment activity
             </small>
@@ -234,7 +345,10 @@ function OrganizerDashboardPage() {
             <div className="role-dashboard-panel-heading">
               <div>
                 <p>Club Status</p>
-                <h2>Management Overview</h2>
+
+                <h2>
+                  Management Overview
+                </h2>
               </div>
             </div>
 
@@ -246,12 +360,20 @@ function OrganizerDashboardPage() {
                   </strong>
 
                   <span>
-                    No teams have been created yet.
+                    {dashboard.summary.totalTeams >
+                    0
+                      ? `${dashboard.summary.totalTeams} team account${
+                          dashboard.summary
+                            .totalTeams === 1
+                            ? ""
+                            : "s"
+                        } registered.`
+                      : "No teams have been created yet."}
                   </span>
                 </div>
 
                 <span className="role-dashboard-status">
-                  Pending
+                  {teamStatus}
                 </span>
               </div>
 
@@ -262,7 +384,16 @@ function OrganizerDashboardPage() {
                   </strong>
 
                   <span>
-                    Daniel Smith is registered.
+                    {
+                      dashboard.summary
+                        .verifiedPlayers
+                    }{" "}
+                    verified player
+                    {dashboard.summary
+                      .verifiedPlayers === 1
+                      ? ""
+                      : "s"}{" "}
+                    registered.
                   </span>
                 </div>
 
@@ -278,7 +409,13 @@ function OrganizerDashboardPage() {
                   </strong>
 
                   <span>
-                    One coach account is active.
+                    {dashboard.summary.coaches}{" "}
+                    coach account
+                    {dashboard.summary.coaches ===
+                    1
+                      ? ""
+                      : "s"}{" "}
+                    active.
                   </span>
                 </div>
 
@@ -293,7 +430,10 @@ function OrganizerDashboardPage() {
             <div className="role-dashboard-panel-heading">
               <div>
                 <p>Teams</p>
-                <h2>Recently Created Teams</h2>
+
+                <h2>
+                  Recently Created Teams
+                </h2>
               </div>
 
               <Link to="/teams">
@@ -301,18 +441,60 @@ function OrganizerDashboardPage() {
               </Link>
             </div>
 
-            <div className="role-dashboard-empty-state">
-              No teams have been created yet. Use
-              Create Team to register the first
-              soccer team.
-            </div>
+            {dashboard.recentTeams.length >
+            0 ? (
+              <div className="role-dashboard-list">
+                {dashboard.recentTeams.map(
+                  (team) => (
+                    <div
+                      key={team.teamId}
+                      className="role-dashboard-list-item"
+                    >
+                      <div>
+                        <strong>
+                          {team.teamName}
+                        </strong>
+
+                        <span>
+                          {team.division ||
+                            "Division not assigned"}
+                          {" • "}
+                          Captain:{" "}
+                          {team.captain
+                            ? `${team.captain.firstName} ${team.captain.lastName}`
+                            : "Not assigned"}
+                          {" • "}
+                          {team.rosterCount} player
+                          {team.rosterCount === 1
+                            ? ""
+                            : "s"}
+                        </span>
+                      </div>
+
+                      <span className="role-dashboard-status">
+                        Active
+                      </span>
+                    </div>
+                  ),
+                )}
+              </div>
+            ) : (
+              <div className="role-dashboard-empty-state">
+                No teams have been created yet.
+                Use Create Team to register the
+                first soccer team.
+              </div>
+            )}
           </section>
 
           <section className="role-dashboard-panel full-width">
             <div className="role-dashboard-panel-heading">
               <div>
                 <p>Registrations</p>
-                <h2>Recently Registered Players</h2>
+
+                <h2>
+                  Recently Registered Players
+                </h2>
               </div>
 
               <Link to="/players">
@@ -320,23 +502,46 @@ function OrganizerDashboardPage() {
               </Link>
             </div>
 
-            <div className="role-dashboard-list">
-              <div className="role-dashboard-list-item">
-                <div>
-                  <strong>
-                    Daniel Smith
-                  </strong>
+            {dashboard.recentPlayers.length >
+            0 ? (
+              <div className="role-dashboard-list">
+                {dashboard.recentPlayers.map(
+                  (player) => (
+                    <Link
+                      key={player.playerId}
+                      to={`/players/${player.playerId}`}
+                      className="role-dashboard-list-item"
+                    >
+                      <div>
+                        <strong>
+                          {player.firstName}{" "}
+                          {player.lastName}
+                        </strong>
 
-                  <span>
-                    Midfielder • Senior • Advanced
-                  </span>
-                </div>
+                        <span>
+                          {player.primaryPosition}
+                          {" • "}
+                          {player.classYear}
+                          {" • "}
+                          {player.skillLevel}
+                        </span>
+                      </div>
 
-                <span className="role-dashboard-status">
-                  Verified
-                </span>
+                      <span className="role-dashboard-status">
+                        {player.isVerified
+                          ? "Verified"
+                          : "Pending"}
+                      </span>
+                    </Link>
+                  ),
+                )}
               </div>
-            </div>
+            ) : (
+              <div className="role-dashboard-empty-state">
+                No registered player profiles are
+                currently available.
+              </div>
+            )}
           </section>
         </div>
       </div>

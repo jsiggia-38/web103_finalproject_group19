@@ -1,7 +1,16 @@
 import {
+  useEffect,
+  useState,
+} from "react";
+
+import {
   Link,
   useNavigate,
 } from "react-router-dom";
+
+import {
+  getCoachDashboard,
+} from "../services/dashboardService.js";
 
 import "../styles/roleDashboard.css";
 
@@ -20,20 +29,89 @@ const getAuthenticatedUser = () => {
   }
 };
 
+const initialDashboardData = {
+  summary: {
+    scoutedPlayers: 0,
+    pendingInvitations: 0,
+    teamPlayers: 0,
+    availablePlayers: 0,
+  },
+  currentTeam: null,
+  recentlyScouted: [],
+  recentInvitations: [],
+};
+
 function CoachDashboardPage() {
   const navigate = useNavigate();
   const user = getAuthenticatedUser();
+
+  const [dashboard, setDashboard] =
+    useState(initialDashboardData);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  const [error, setError] =
+    useState("");
+
+  useEffect(() => {
+    const loadDashboard = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const result =
+          await getCoachDashboard();
+
+        setDashboard(
+          result.data ||
+            initialDashboardData,
+        );
+      } catch (requestError) {
+        setError(
+          requestError.message ||
+            "Unable to load the Coach dashboard.",
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDashboard();
+  }, []);
 
   const handleLogout = () => {
     sessionStorage.removeItem("authToken");
     sessionStorage.removeItem(
       "authenticatedUser",
     );
+    sessionStorage.removeItem(
+      "createdPlayerAccount",
+    );
 
     navigate("/login", {
       replace: true,
     });
   };
+
+  if (loading) {
+    return (
+      <main className="role-dashboard-page">
+        <div className="role-dashboard-container">
+          <section className="role-dashboard-loading-state">
+            <div className="role-dashboard-spinner" />
+
+            <h1>Loading Coach Dashboard</h1>
+
+            <p>
+              Retrieving your team and recruitment
+              information.
+            </p>
+          </section>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="role-dashboard-page">
@@ -81,6 +159,15 @@ function CoachDashboardPage() {
           </div>
         </header>
 
+        {error && (
+          <p
+            className="role-dashboard-error"
+            role="alert"
+          >
+            {error}
+          </p>
+        )}
+
         <section className="role-dashboard-hero">
           <div>
             <p className="role-dashboard-eyebrow">
@@ -110,15 +197,27 @@ function CoachDashboardPage() {
         <section className="role-dashboard-stats-grid">
           <article className="role-dashboard-stat-card">
             <span>Scouted Players</span>
-            <strong>0</strong>
+
+            <strong>
+              {dashboard.summary
+                .scoutedPlayers}
+            </strong>
+
             <small>
               Players saved for review
             </small>
           </article>
 
           <article className="role-dashboard-stat-card">
-            <span>Pending Invitations</span>
-            <strong>0</strong>
+            <span>
+              Pending Invitations
+            </span>
+
+            <strong>
+              {dashboard.summary
+                .pendingInvitations}
+            </strong>
+
             <small>
               Awaiting player response
             </small>
@@ -126,15 +225,26 @@ function CoachDashboardPage() {
 
           <article className="role-dashboard-stat-card">
             <span>Team Players</span>
-            <strong>0</strong>
+
+            <strong>
+              {dashboard.summary.teamPlayers}
+            </strong>
+
             <small>
               Current registered roster
             </small>
           </article>
 
           <article className="role-dashboard-stat-card">
-            <span>Available Players</span>
-            <strong>1</strong>
+            <span>
+              Available Players
+            </span>
+
+            <strong>
+              {dashboard.summary
+                .availablePlayers}
+            </strong>
+
             <small>
               Verified players available now
             </small>
@@ -241,18 +351,94 @@ function CoachDashboardPage() {
               </div>
             </div>
 
-            <div className="role-dashboard-empty-state">
-              You are not assigned to a team yet.
-              A team can be created or assigned by
-              a club organizer.
-            </div>
+            {dashboard.currentTeam ? (
+              <div className="role-dashboard-list">
+                <div className="role-dashboard-list-item">
+                  <div>
+                    <strong>
+                      {
+                        dashboard.currentTeam
+                          .teamName
+                      }
+                    </strong>
+
+                    <span>
+                      {dashboard.currentTeam
+                        .division ||
+                        "Division not assigned"}
+                    </span>
+                  </div>
+
+                  <span className="role-dashboard-status">
+                    Active
+                  </span>
+                </div>
+
+                <div className="role-dashboard-list-item">
+                  <div>
+                    <strong>
+                      Practice Location
+                    </strong>
+
+                    <span>
+                      {dashboard.currentTeam
+                        .practiceLocation ||
+                        "Not provided"}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="role-dashboard-list-item">
+                  <div>
+                    <strong>
+                      Practice Schedule
+                    </strong>
+
+                    <span>
+                      {dashboard.currentTeam
+                        .practiceSchedule ||
+                        "Not provided"}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="role-dashboard-list-item">
+                  <div>
+                    <strong>
+                      Current Roster
+                    </strong>
+
+                    <span>
+                      {
+                        dashboard.currentTeam
+                          .rosterCount
+                      }{" "}
+                      of{" "}
+                      {dashboard.currentTeam
+                        .maximumRosterSize ||
+                        "No limit"}{" "}
+                      players
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="role-dashboard-empty-state">
+                You are not assigned to a team yet.
+                A team can be created or assigned
+                by a club organizer.
+              </div>
+            )}
           </section>
 
           <section className="role-dashboard-panel full-width">
             <div className="role-dashboard-panel-heading">
               <div>
                 <p>Scouting Activity</p>
-                <h2>Recently Scouted Players</h2>
+
+                <h2>
+                  Recently Scouted Players
+                </h2>
               </div>
 
               <Link to="/scout-list">
@@ -260,18 +446,55 @@ function CoachDashboardPage() {
               </Link>
             </div>
 
-            <div className="role-dashboard-empty-state">
-              No players have been added to your
-              scout list yet. Browse verified
-              players to begin recruiting.
-            </div>
+            {dashboard.recentlyScouted.length >
+            0 ? (
+              <div className="role-dashboard-list">
+                {dashboard.recentlyScouted.map(
+                  (entry) => (
+                    <Link
+                      key={entry.scoutId}
+                      to={`/players/${entry.playerId}`}
+                      className="role-dashboard-list-item"
+                    >
+                      <div>
+                        <strong>
+                          {entry.firstName}{" "}
+                          {entry.lastName}
+                        </strong>
+
+                        <span>
+                          {entry.primaryPosition}
+                          {" • "}
+                          {entry.classYear}
+                          {" • "}
+                          {entry.skillLevel}
+                        </span>
+                      </div>
+
+                      <span className="role-dashboard-status">
+                        {entry.status}
+                      </span>
+                    </Link>
+                  ),
+                )}
+              </div>
+            ) : (
+              <div className="role-dashboard-empty-state">
+                No players have been added to your
+                scout list yet. Browse verified
+                players to begin recruiting.
+              </div>
+            )}
           </section>
 
           <section className="role-dashboard-panel full-width">
             <div className="role-dashboard-panel-heading">
               <div>
                 <p>Recruitment</p>
-                <h2>Recent Tryout Invitations</h2>
+
+                <h2>
+                  Recent Tryout Invitations
+                </h2>
               </div>
 
               <Link to="/invitations">
@@ -279,10 +502,45 @@ function CoachDashboardPage() {
               </Link>
             </div>
 
-            <div className="role-dashboard-empty-state">
-              No tryout invitations have been sent
-              yet.
-            </div>
+            {dashboard.recentInvitations.length >
+            0 ? (
+              <div className="role-dashboard-list">
+                {dashboard.recentInvitations.map(
+                  (invitation) => (
+                    <div
+                      key={
+                        invitation.invitationId
+                      }
+                      className="role-dashboard-list-item"
+                    >
+                      <div>
+                        <strong>
+                          {invitation.firstName}{" "}
+                          {invitation.lastName}
+                        </strong>
+
+                        <span>
+                          {invitation.tryoutDate ||
+                            "Date pending"}
+                          {" • "}
+                          {invitation.location ||
+                            "Location pending"}
+                        </span>
+                      </div>
+
+                      <span className="role-dashboard-status">
+                        {invitation.status}
+                      </span>
+                    </div>
+                  ),
+                )}
+              </div>
+            ) : (
+              <div className="role-dashboard-empty-state">
+                No tryout invitations have been
+                sent yet.
+              </div>
+            )}
           </section>
         </div>
       </div>

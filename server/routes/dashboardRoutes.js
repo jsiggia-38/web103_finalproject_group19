@@ -1,9 +1,9 @@
 import express from "express";
 
 import {
-  createTeam,
-  getAvailableCoaches,
-} from "../controllers/teamController.js";
+  getCoachDashboard,
+  getOrganizerDashboard,
+} from "../controllers/dashboardController.js";
 
 import {
   authenticateUser,
@@ -13,17 +13,17 @@ import {
 const router = express.Router();
 
 router.get(
-  "/available-coaches",
+  "/coach",
   authenticateUser,
-  authorizeRoles("Organizer"),
-  getAvailableCoaches,
+  authorizeRoles("Coach"),
+  getCoachDashboard,
 );
 
-router.post(
-  "/",
+router.get(
+  "/organizer",
   authenticateUser,
   authorizeRoles("Organizer"),
-  createTeam,
+  getOrganizerDashboard,
 );
 
 export default router;
