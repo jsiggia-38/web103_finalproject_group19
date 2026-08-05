@@ -127,8 +127,8 @@ Players and recruiters can view:
 
 
 ##
-Verified football information remains locked to preserve data integrity, while players can update their biography, profile image, and availability.
-Players can also delete their profile
+- Verified football information remains locked to preserve data integrity, while players can update their biography, profile image, and availability.
+- Players can also delete their profile
 
 
 <img src="./client/public/images/Edit%20Feature.gif"
