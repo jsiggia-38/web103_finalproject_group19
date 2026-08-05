@@ -122,9 +122,18 @@ Players and recruiters can view:
 - Scouting status
 - Recent tryout invitations
 
-Verified football information remains locked to preserve data integrity, while players can update their biography, profile image, and availability.
 
 <img width="1920" height="1018" alt="Player 1" src="https://github.com/user-attachments/assets/36cdca39-7e91-4d7c-af64-96c545ba91e5" />
+
+
+##
+Verified football information remains locked to preserve data integrity, while players can update their biography, profile image, and availability.
+Players can also delete their profile
+##
+
+<img src="./client/public/images/Edit%20Feature.gif"
+     alt="Edit and Delete Demo"
+     width="900">
 
 
 
