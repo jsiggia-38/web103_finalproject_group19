@@ -175,6 +175,8 @@ Captains and coaches can invite players to upcoming tryouts using a popup modal 
 ### AI Assistant(Custom 4)
 An AI assistant that helps the user accomplish their tasks.  
 
+<img width="1920" height="1018" alt="AI Feature" src="https://github.com/user-attachments/assets/b4e8186c-7f11-4b5b-a0dc-b70b1f399248" />
+
 
 ### Responsive User Interface
 The application is fully responsive and optimized for desktop, tablet, and mobile devices.
