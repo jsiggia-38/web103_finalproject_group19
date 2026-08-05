@@ -128,7 +128,7 @@ Verified football information remains locked to preserve data integrity, while p
 
 
 
-### Browse Players (Search • Filter • Sort) (Custom 2)
+### ✅ Browse Players (Search • Filter • Sort) (Custom 2)
 
 Players can be searched, filtered, and sorted by:
 
@@ -139,7 +139,9 @@ Class Year
 Goals
 Assists
 
-browse-players.gif
+<img src="./client/public/images/Browse%20feature.gif"
+     alt="Browse Players Demo"
+     width="900">
 
 
 
