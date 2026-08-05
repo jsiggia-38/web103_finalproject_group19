@@ -35,3 +35,11 @@ export const createTeam = async ({
     }),
   });
 };
+
+export const getTeamById = async (
+  teamId,
+) => {
+  return apiRequest(
+    `/api/teams/${teamId}`,
+  );
+};

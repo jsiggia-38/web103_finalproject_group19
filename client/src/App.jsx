@@ -19,6 +19,8 @@ import PlayersPage from "./pages/PlayersPage.jsx";
 import CreateTeamPage from "./pages/CreateTeamPage.jsx";
 import ScoutListPage from "./pages/ScoutListPage.jsx";
 import TeamsPage from "./pages/TeamsPage.jsx";
+import TeamDetailsPage from "./pages/TeamDetailsPage.jsx";
+
 
 function App() {
   return (
@@ -102,6 +104,11 @@ function App() {
       <CreateTeamPage />
     </ProtectedRoute>
   }
+/>
+
+<Route
+  path="/teams/:teamId"
+  element={<TeamDetailsPage />}
 />
 
 <Route

@@ -169,10 +169,114 @@ const getAllTeams = async () => {
   return result.rows;
 };
 
+const getTeamById = async (teamId) => {
+  const teamQuery = `
+    SELECT
+      t.team_id,
+      t.organizer_id,
+      t.captain_id,
+      t.team_name,
+      t.division,
+      t.description,
+      t.logo_url,
+      t.practice_location,
+      t.practice_schedule,
+      t.maximum_roster_size,
+      t.created_at,
+
+      captain.first_name AS captain_first_name,
+      captain.last_name AS captain_last_name,
+      captain.email AS captain_email,
+
+      organizer.first_name AS organizer_first_name,
+      organizer.last_name AS organizer_last_name,
+
+      (
+        SELECT COUNT(*)
+        FROM players AS p
+        WHERE p.team_id = t.team_id
+      )::INTEGER AS roster_count
+
+    FROM teams AS t
+
+    LEFT JOIN users AS captain
+      ON captain.user_id = t.captain_id
+
+    LEFT JOIN users AS organizer
+      ON organizer.user_id = t.organizer_id
+
+    WHERE t.team_id = $1;
+  `;
+
+  const teamResult = await pool.query(
+    teamQuery,
+    [teamId],
+  );
+
+  const team = teamResult.rows[0];
+
+  if (!team) {
+    return null;
+  }
+
+  const playersQuery = `
+    SELECT
+      p.player_id,
+      p.profile_image,
+      p.primary_position,
+      p.secondary_position,
+      p.preferred_foot,
+      p.class_year,
+      p.skill_level,
+      p.availability,
+      p.is_verified,
+
+      u.first_name,
+      u.last_name,
+
+      COALESCE(ps.goals, 0)::INTEGER
+        AS goals,
+
+      COALESCE(ps.assists, 0)::INTEGER
+        AS assists,
+
+      COALESCE(ps.clean_sheets, 0)::INTEGER
+        AS clean_sheets,
+
+      COALESCE(ps.games_played, 0)::INTEGER
+        AS games_played
+
+    FROM players AS p
+
+    INNER JOIN users AS u
+      ON u.user_id = p.user_id
+
+    LEFT JOIN player_statistics AS ps
+      ON ps.player_id = p.player_id
+
+    WHERE p.team_id = $1
+
+    ORDER BY
+      u.first_name ASC,
+      u.last_name ASC;
+  `;
+
+  const playersResult = await pool.query(
+    playersQuery,
+    [teamId],
+  );
+
+  return {
+    team,
+    players: playersResult.rows,
+  };
+};
+
 export {
   createTeam,
   findCoachById,
   findTeamByCaptainId,
   getAvailableCoaches,
   getAllTeams,
+  getTeamById,
 };

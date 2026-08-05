@@ -4,6 +4,7 @@ import {
   createTeam,
   getAllTeams,
   getAvailableCoaches,
+  getTeamById,
 } from "../controllers/teamController.js";
 
 import {
@@ -26,6 +27,11 @@ router.get(
   authenticateUser,
   authorizeRoles("Organizer"),
   getAvailableCoaches,
+);
+
+router.get(
+  "/:teamId",
+  getTeamById,
 );
 
 router.post(

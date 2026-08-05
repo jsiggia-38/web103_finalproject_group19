@@ -4,6 +4,7 @@ import {
   findTeamByCaptainId,
   getAllTeams as getAllTeamsFromDatabase,
   getAvailableCoaches as getAvailableCoachesFromDatabase,
+  getTeamById as getTeamByIdFromDatabase,
 } from "../models/teamModel.js";
 
 const getAvailableCoaches = async (
@@ -270,8 +271,155 @@ const getAllTeams = async (req, res) => {
   }
 };
 
+const getTeamById = async (req, res) => {
+  try {
+    const teamId = Number(
+      req.params.teamId,
+    );
+
+    if (
+      !Number.isInteger(teamId) ||
+      teamId <= 0
+    ) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "The team ID must be a valid positive integer.",
+      });
+    }
+
+    const result =
+      await getTeamByIdFromDatabase(
+        teamId,
+      );
+
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: "Team not found.",
+      });
+    }
+
+    const { team, players } = result;
+
+    return res.status(200).json({
+      success: true,
+
+      data: {
+        teamId: team.team_id,
+        teamName: team.team_name,
+        division: team.division,
+        description: team.description,
+        logoUrl: team.logo_url,
+
+        practiceLocation:
+          team.practice_location,
+
+        practiceSchedule:
+          team.practice_schedule,
+
+        maximumRosterSize:
+          team.maximum_roster_size,
+
+        rosterCount:
+          team.roster_count,
+
+        captain: team.captain_id
+          ? {
+              userId: team.captain_id,
+
+              firstName:
+                team.captain_first_name,
+
+              lastName:
+                team.captain_last_name,
+
+              email:
+                team.captain_email,
+            }
+          : null,
+
+        organizer: team.organizer_id
+          ? {
+              userId:
+                team.organizer_id,
+
+              firstName:
+                team.organizer_first_name,
+
+              lastName:
+                team.organizer_last_name,
+            }
+          : null,
+
+        players: players.map(
+          (player) => ({
+            playerId:
+              player.player_id,
+
+            firstName:
+              player.first_name,
+
+            lastName:
+              player.last_name,
+
+            profileImage:
+              player.profile_image,
+
+            primaryPosition:
+              player.primary_position,
+
+            secondaryPosition:
+              player.secondary_position,
+
+            preferredFoot:
+              player.preferred_foot,
+
+            classYear:
+              player.class_year,
+
+            skillLevel:
+              player.skill_level,
+
+            availability:
+              player.availability,
+
+            isVerified:
+              player.is_verified,
+
+            statistics: {
+              goals: player.goals,
+              assists: player.assists,
+
+              cleanSheets:
+                player.clean_sheets,
+
+              gamesPlayed:
+                player.games_played,
+            },
+          }),
+        ),
+
+        createdAt: team.created_at,
+      },
+    });
+  } catch (error) {
+    console.error(
+      "Unable to retrieve team:",
+      error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message:
+        "An unexpected error occurred while retrieving the team.",
+    });
+  }
+};
+
 export {
   createTeam,
   getAvailableCoaches,
   getAllTeams,
+  getTeamById,
 };
