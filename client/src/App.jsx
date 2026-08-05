@@ -18,6 +18,7 @@ import PlayerOwnerRoute from "./components/auth/PlayerOwnerRoute.jsx";
 import PlayersPage from "./pages/PlayersPage.jsx";
 import CreateTeamPage from "./pages/CreateTeamPage.jsx";
 import ScoutListPage from "./pages/ScoutListPage.jsx";
+import TeamsPage from "./pages/TeamsPage.jsx";
 
 function App() {
   return (
@@ -85,6 +86,11 @@ function App() {
       <OrganizerDashboardPage />
     </ProtectedRoute>
   }
+/>
+
+<Route
+  path="/teams"
+  element={<TeamsPage />}
 />
 
 <Route

@@ -74,3 +74,10 @@ export const deletePlayerProfile = async (
     method: "DELETE",
   });
 };
+
+export const getPlayerRecruitmentActivity =
+  async (playerId) => {
+    return apiRequest(
+      `/api/players/${playerId}/recruitment`,
+    );
+  };

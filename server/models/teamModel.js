@@ -123,9 +123,56 @@ const findTeamByCaptainId = async (
   return result.rows[0] || null;
 };
 
+const getAllTeams = async () => {
+  const query = `
+    SELECT
+      t.team_id,
+      t.team_name,
+      t.division,
+      t.description,
+      t.logo_url,
+      t.practice_location,
+      t.practice_schedule,
+      t.maximum_roster_size,
+      t.created_at,
+
+      captain.user_id AS captain_id,
+      captain.first_name AS captain_first_name,
+      captain.last_name AS captain_last_name,
+      captain.email AS captain_email,
+
+      organizer.user_id AS organizer_id,
+      organizer.first_name AS organizer_first_name,
+      organizer.last_name AS organizer_last_name,
+
+      (
+        SELECT COUNT(*)
+        FROM players AS p
+        WHERE p.team_id = t.team_id
+      )::INTEGER AS roster_count
+
+    FROM teams AS t
+
+    LEFT JOIN users AS captain
+      ON captain.user_id = t.captain_id
+
+    LEFT JOIN users AS organizer
+      ON organizer.user_id = t.organizer_id
+
+    ORDER BY
+      t.created_at DESC,
+      t.team_name ASC;
+  `;
+
+  const result = await pool.query(query);
+
+  return result.rows;
+};
+
 export {
   createTeam,
   findCoachById,
   findTeamByCaptainId,
   getAvailableCoaches,
+  getAllTeams,
 };

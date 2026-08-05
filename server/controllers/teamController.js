@@ -2,6 +2,7 @@ import {
   createTeam as createTeamInDatabase,
   findCoachById,
   findTeamByCaptainId,
+  getAllTeams as getAllTeamsFromDatabase,
   getAvailableCoaches as getAvailableCoachesFromDatabase,
 } from "../models/teamModel.js";
 
@@ -209,7 +210,68 @@ const createTeam = async (req, res) => {
   }
 };
 
+const getAllTeams = async (req, res) => {
+  try {
+    const teams =
+      await getAllTeamsFromDatabase();
+
+    return res.status(200).json({
+      success: true,
+      count: teams.length,
+      data: teams.map((team) => ({
+        teamId: team.team_id,
+        teamName: team.team_name,
+        division: team.division,
+        description: team.description,
+        logoUrl: team.logo_url,
+        practiceLocation:
+          team.practice_location,
+        practiceSchedule:
+          team.practice_schedule,
+        maximumRosterSize:
+          team.maximum_roster_size,
+        rosterCount: team.roster_count,
+
+        captain: team.captain_id
+          ? {
+              userId: team.captain_id,
+              firstName:
+                team.captain_first_name,
+              lastName:
+                team.captain_last_name,
+              email: team.captain_email,
+            }
+          : null,
+
+        organizer: team.organizer_id
+          ? {
+              userId: team.organizer_id,
+              firstName:
+                team.organizer_first_name,
+              lastName:
+                team.organizer_last_name,
+            }
+          : null,
+
+        createdAt: team.created_at,
+      })),
+    });
+  } catch (error) {
+    console.error(
+      "Unable to retrieve teams:",
+      error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message:
+        "An unexpected error occurred while retrieving teams.",
+    });
+  }
+};
+
 export {
   createTeam,
   getAvailableCoaches,
+  getAllTeams,
 };

@@ -13,6 +13,7 @@ import {
 import {
   deletePlayerProfile,
   getPlayerById,
+  getPlayerRecruitmentActivity,
 } from "../services/playerService.js";
 
 import "../styles/playerDetails.css";
@@ -58,6 +59,22 @@ const [scoutListError, setScoutListError] =
 
 const [isAddedToScoutList, setIsAddedToScoutList] =
   useState(false);
+
+  const [
+  scoutingActivity,
+  setScoutingActivity,
+] = useState([]);
+
+const [
+  loadingRecruitment,
+  setLoadingRecruitment,
+] = useState(false);
+
+const [
+  recruitmentError,
+  setRecruitmentError,
+] = useState("");
+
 
   const [player, setPlayer] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -165,6 +182,38 @@ const handleDeleteProfile = async () => {
 
     loadPlayer();
   }, [playerId]);
+
+  useEffect(() => {
+  if (!isProfileOwner) {
+    return;
+  }
+
+  const loadRecruitmentActivity =
+    async () => {
+      try {
+        setLoadingRecruitment(true);
+        setRecruitmentError("");
+
+        const result =
+          await getPlayerRecruitmentActivity(
+            playerId,
+          );
+
+        setScoutingActivity(
+          result.data?.scoutingActivity || [],
+        );
+      } catch (requestError) {
+        setRecruitmentError(
+          requestError.message ||
+            "Unable to load recruitment activity.",
+        );
+      } finally {
+        setLoadingRecruitment(false);
+      }
+    };
+
+  loadRecruitmentActivity();
+}, [isProfileOwner, playerId]);
 
   if (loading) {
     return (
@@ -562,29 +611,116 @@ const handleDeleteProfile = async () => {
           </section>
 
           <section className="player-details-panel">
-            <div className="player-section-heading compact">
-              <div>
-                <p>Recruitment</p>
-                <h2>Scouting Status</h2>
-              </div>
-            </div>
+  <div className="player-section-heading compact">
+    <div>
+      <p>Recruitment</p>
+      <h2>Scouting Status</h2>
+    </div>
+  </div>
 
-            <div className="scouting-empty-state">
-              <span>☆</span>
+  {!isProfileOwner ? (
+    <div className="scouting-private-state">
+      <span>🔒</span>
 
-              <div>
-                <h3>
-                  No Scouting Activity Yet
-                </h3>
+      <div>
+        <h3>Private Player Information</h3>
 
-                <p>
-                  Team interest, scouting status,
-                  and recruitment progress will
-                  appear here.
-                </p>
-              </div>
-            </div>
-          </section>
+        <p>
+          Scouting activity is visible only to
+          the player who owns this profile.
+        </p>
+      </div>
+    </div>
+  ) : loadingRecruitment ? (
+    <div className="scouting-loading-state">
+      <div className="scouting-loading-spinner" />
+
+      <p>
+        Loading scouting activity...
+      </p>
+    </div>
+  ) : recruitmentError ? (
+    <div className="scouting-error-state">
+      <span>!</span>
+
+      <div>
+        <h3>
+          Unable to Load Scouting Activity
+        </h3>
+
+        <p>{recruitmentError}</p>
+      </div>
+    </div>
+  ) : scoutingActivity.length === 0 ? (
+    <div className="scouting-empty-state">
+      <span>☆</span>
+
+      <div>
+        <h3>
+          No Scouting Activity Yet
+        </h3>
+
+        <p>
+          Team interest, scouting status, and
+          recruitment progress will appear here.
+        </p>
+      </div>
+    </div>
+  ) : (
+    <div className="player-scouting-activity-list">
+      {scoutingActivity.map((activity) => (
+        <article
+          key={activity.scoutId}
+          className="player-scouting-activity-card"
+        >
+          <div className="player-scouting-team-logo">
+            {activity.team.logoUrl ? (
+              <img
+                src={activity.team.logoUrl}
+                alt={`${activity.team.teamName} logo`}
+                onError={(event) => {
+                  event.currentTarget.style.display =
+                    "none";
+                }}
+              />
+            ) : (
+              <span>🛡️</span>
+            )}
+          </div>
+
+          <div className="player-scouting-activity-content">
+            <span className="player-scouting-label">
+              Team Interest
+            </span>
+
+            <h3>
+              {activity.team.teamName}
+            </h3>
+
+            <p>
+              {activity.team.division ||
+                "College soccer team"}
+            </p>
+
+            <p className="player-scouting-message">
+              This team has added your verified
+              profile to its recruitment scout
+              list.
+            </p>
+          </div>
+
+          <span
+            className={`player-scouting-status status-${activity.status
+              ?.toLowerCase()
+              .replaceAll(" ", "-")}`}
+          >
+            {activity.status}
+          </span>
+        </article>
+      ))}
+    </div>
+  )}
+</section>
 
           <section className="player-details-panel">
             <div className="player-section-heading compact">

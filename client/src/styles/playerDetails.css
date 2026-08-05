@@ -910,6 +910,203 @@
   color: #ffb4ab;
 }
 
+.player-scouting-activity-list {
+  display: grid;
+  gap: 14px;
+}
+
+.player-scouting-activity-card {
+  padding: 17px;
+
+  display: grid;
+  grid-template-columns:
+    52px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 15px;
+
+  border: 1px solid
+    rgb(120 220 119 / 22%);
+
+  border-radius: 13px;
+
+  background:
+    rgb(120 220 119 / 5%);
+}
+
+.player-scouting-team-logo {
+  width: 52px;
+  height: 52px;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+
+  border: 1px solid
+    rgb(120 220 119 / 35%);
+
+  border-radius: 50%;
+
+  background:
+    rgb(120 220 119 / 10%);
+
+  font-size: 1.45rem;
+}
+
+.player-scouting-team-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.player-scouting-label {
+  color: #78dc77;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.player-scouting-activity-content h3 {
+  margin: 5px 0 4px;
+  color: #ffffff;
+}
+
+.player-scouting-activity-content p {
+  margin: 0;
+  color: #98a496;
+}
+
+.player-scouting-activity-content
+.player-scouting-message {
+  margin-top: 8px;
+  line-height: 1.55;
+}
+
+.player-scouting-status {
+  padding: 7px 11px;
+
+  border-radius: 999px;
+
+  background:
+    rgb(120 220 119 / 13%);
+
+  color: #78dc77;
+
+  font-size: 0.76rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.player-scouting-status.status-watching {
+  background:
+    rgb(255 200 87 / 12%);
+  color: #ffd878;
+}
+
+.player-scouting-status.status-contacted {
+  background:
+    rgb(91 164 255 / 13%);
+  color: #8fc5ff;
+}
+
+.player-scouting-status.status-tryout-invited {
+  background:
+    rgb(174 115 255 / 14%);
+  color: #c9a5ff;
+}
+
+.player-scouting-status.status-added-to-team {
+  background:
+    rgb(120 220 119 / 18%);
+  color: #8cf18b;
+}
+
+.scouting-private-state,
+.scouting-error-state {
+  padding: 18px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+
+  border: 1px dashed
+    rgb(120 220 119 / 25%);
+
+  border-radius: 12px;
+
+  background:
+    rgb(120 220 119 / 4%);
+}
+
+.scouting-private-state h3,
+.scouting-error-state h3 {
+  margin: 0 0 5px;
+}
+
+.scouting-private-state p,
+.scouting-error-state p {
+  margin: 0;
+  color: #98a496;
+  line-height: 1.55;
+}
+
+.scouting-error-state {
+  border-color:
+    rgb(255 107 107 / 35%);
+
+  background:
+    rgb(147 0 10 / 10%);
+}
+
+.scouting-error-state > span {
+  color: #ff8d8d;
+  font-weight: 900;
+}
+
+.scouting-loading-state {
+  min-height: 110px;
+
+  display: grid;
+  place-items: center;
+
+  color: #98a496;
+  text-align: center;
+}
+
+.scouting-loading-spinner {
+  width: 35px;
+  height: 35px;
+
+  border: 3px solid
+    rgb(120 220 119 / 18%);
+
+  border-top-color: #78dc77;
+  border-radius: 50%;
+
+  animation:
+    scouting-status-spin
+    800ms linear infinite;
+}
+
+@keyframes scouting-status-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 650px) {
+  .player-scouting-activity-card {
+    grid-template-columns:
+      48px minmax(0, 1fr);
+  }
+
+  .player-scouting-status {
+    grid-column: 1 / -1;
+    width: fit-content;
+  }
+}
+
 @media (max-width: 700px) {
   .player-dashboard-topbar {
     align-items: flex-start;

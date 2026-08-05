@@ -2,6 +2,7 @@ import express from "express";
 
 import {
   createTeam,
+  getAllTeams,
   getAvailableCoaches,
 } from "../controllers/teamController.js";
 
@@ -11,6 +12,14 @@ import {
 } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
+
+/**
+ * Public teams directory.
+ */
+router.get(
+  "/",
+  getAllTeams,
+);
 
 router.get(
   "/available-coaches",
