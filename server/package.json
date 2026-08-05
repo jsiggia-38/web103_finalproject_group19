@@ -1,11 +1,11 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "College Soccer Scout Helper API",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "npm run reset && nodemon --require dotenv/config server.js",
+    "start": "node --require dotenv/config server.js",
     "dev": "nodemon --require dotenv/config server.js",
     "reset": "cd config && node --require dotenv/config reset.js"
   },
