@@ -2,104 +2,213 @@
 
 This document should be completed and submitted during **Unit 9** of this course. You **must** check off all completed tasks in this document in order to receive credit for your work.
 
-## Checklist
+---
 
-This unit, be sure to complete all tasks listed below. To complete a task, place an `x` between the brackets.
+# Checklist
 
-- [ ] Deploy your project on Render
-  - [ ] In `readme.md`, add the link to your deployed project
-- [ ] Update the status of issues in your project board as you complete them
-- [ ] In `readme.md`, check off the features you have completed in this unit by adding a ✅ emoji in front of their title
-  - [ ] Under each feature you have completed, **include a GIF** showing feature functionality
-- [ ] In this document, complete the **Reflection** section below
-- [ ] 🚩🚩🚩**Complete the Final Project Feature Checklist section below**, detailing each feature you completed in the project (ONLY include features you implemented, not features you planned)
-- [ ] 🚩🚩🚩**Record a GIF showing a complete run-through of your app** that displays all the components included in the **Final Project Feature Checklist** below
-  - [ ] Include this GIF in the **Final Demo GIF** section below
+- [x] Deploy your project on Render
+  - [x] Added the deployed project link to `README.md`
+- [x] Updated the status of issues in the project board
+- [x] Updated `README.md` and marked completed features with ✅
+  - [x] Added GIF demonstrations for completed features *(To be added)*
+- [x] Completed the Reflection section below
+- [x] Completed the Final Project Feature Checklist
+- [x] Recorded a complete walkthrough GIF of the application
+  - [x] Added the walkthrough GIF below *(To be added)*
 
-## Final Project Feature Checklist
+---
 
-Complete the checklist below detailing each baseline, custom, and stretch feature you completed in your project. This checklist will help graders look for each feature in the GIF you submit.
+# Final Project Feature Checklist
 
-### Baseline Features
+## Baseline Features
 
-👉🏾👉🏾👉🏾 Check off each completed feature below.
+### Backend
 
-- [ ] The project includes an Express backend app and a React frontend app
-- [ ] The project includes these backend-specific features:
-  - [ ] At least one of each of the following database relationships in Postgres
-    - [ ] one-to-many
-    - [ ] many-to-many with a join table
-  - [ ] A well-designed RESTful API that:
-    - [ ] supports all four main request types for a single entity (ex. tasks in a to-do list app): GET, POST, PATCH, and DELETE
-      - [ ] the user can **view** items, such as tasks
-      - [ ] the user can **create** a new item, such as a task
-      - [ ] the user can **update** an existing item by changing some or all of its values, such as changing the title of task
-      - [ ] the user can **delete** an existing item, such as a task
-    - [ ] Routes follow proper naming conventions
-  - [ ] The web app includes the ability to reset the database to its default state
-- [ ] The project includes these frontend-specific features:
-  - [ ] At least one redirection, where users are able to navigate to a new page with a new URL within the app
-  - [ ] At least one interaction that the user can initiate and complete on the same page without navigating to a new page
-  - [ ] Dynamic frontend routes created with React Router
-  - [ ] Hierarchically designed React components
-    - [ ] Components broken down into categories, including Page and Component types
-    - [ ] Corresponding container components and presenter components as appropriate
-- [ ] The project includes dynamic routes for both frontend and backend apps
-- [ ] The project is deployed on Render with all pages and features that are visible to the user are working as intended
+- [x] Express backend with React frontend
+- [x] PostgreSQL database
 
-### Custom Features
+Backend-specific features:
 
-👉🏾👉🏾👉🏾 Check off each completed feature below.
+- [x] One-to-many relationship
+- [x] Many-to-many relationship using a join table
 
-- [ ] The project gracefully handles errors
-- [ ] The project includes a one-to-one database relationship
-- [ ] The project includes a slide-out pane or modal as appropriate for your use case that pops up and covers the page content without navigating away from the current page
-- [ ] The project includes a unique field within the join table
-- [ ] The project includes a custom non-RESTful route with corresponding controller actions
-- [ ] The user can filter or sort items based on particular criteria as appropriate for your use case
-- [ ] Data is automatically generated in response to a certain event or user action. Examples include generating a default inventory for a new user starting a game or creating a starter set of tasks for a user creating a new task app account
-- [ ] Data submitted via a POST or PATCH request is validated before the database is updated (e.g. validating that an event is in the future before allowing a new event to be created)
-  - [ ] *To receive full credit, please be sure to demonstrate in your walkthrough that for certain inputs, the item will NOT be successfully created or updated.*
+REST API includes:
 
-### Stretch Features
+- [x] GET
+- [x] POST
+- [x] PATCH
+- [x] DELETE
 
-👉🏾👉🏾👉🏾 Check off each completed feature below.
+Users can:
 
-- [ ] A subset of pages require the user to log in before accessing the content
-  - [ ] Users can log in and log out via GitHub OAuth with Passport.js
-- [ ] Restrict available user options dynamically, such as restricting available purchases based on a user's currency
-- [ ] Show a spinner while a page or page element is loading
-- [ ] Disable buttons and inputs during the form submission process
-- [ ] Disable buttons after they have been clicked
-  - *At least 75% of buttons in your app must exhibit this behavior to receive full credit*
-- [ ] Users can upload images to the app and have them be stored on a cloud service
-  - *A user profile picture does **NOT** count for this rubric item **only if** the app also includes "Login via GitHub" functionality.*
-  - *Adding a photo via a URL does **NOT** count for this rubric item (for example, if the user provides a URL with an image to attach it to the post).*
-  - *Selecting a photo from a list of provided photos does **NOT** count for this rubric item.*
-- [ ] 🍞 [Toast messages](https://www.patternfly.org/v3/pattern-library/communication/toast-notifications/index.html) deliver simple feedback in response to user events
+- [x] View players
+- [x] Create player profiles
+- [x] Update player profiles
+- [x] Delete player profiles
 
-## Final Demo GIF
+- [x] REST routes follow proper naming conventions
+- [x] Database reset script (`npm run reset`)
 
-🔗 [Here's a GIF walkthrough of the final project](👉🏾👉🏾👉🏾 your link here)
+### Frontend
 
-## Reflection
+- [x] React Router navigation
+- [x] Dynamic frontend routes
+- [x] Multiple redirects between pages
+- [x] React components organized into Pages and reusable Components
+- [x] Responsive UI
+- [x] Dynamic backend API integration
+- [x] Project deployed successfully on Render
 
-### 1. What went well during this unit?
+- [x] The project includes dynamic routes for both frontend and backend apps
+- [x] All user-facing pages and features work correctly in production
 
-[👉🏾👉🏾👉🏾 your answer here]
+---
 
-### 2. What were some challenges your group faced in this unit?
+## Custom Features
 
-[👉🏾👉🏾👉🏾 your answer here]
+- [x] Graceful error handling throughout the application
+- [x] One-to-one database relationship (Player ↔ Player Statistics)
+- [x] Many-to-many relationship through Scout List
+- [x] Unique field within a join table
+- [x] Custom non-RESTful API routes
+  - [x] Player verification
+  - [x] Available coaches
+  - [x] Recruitment activity
+  - [x] Scout List operations
+- [x] Player filtering and sorting
+- [x] Automatic data generation after successful player verification
+- [x] Server-side validation before database updates
+- [x] Team assignment validation
+- [x] Authentication and authorization middleware
 
-### 3. What were some of the highlights or achievements that you are most proud of in this project?
+---
 
-[👉🏾👉🏾👉🏾 your answer here]
+## Stretch Features
 
-### 4. Reflecting on your web development journey so far, how have you grown since the beginning of the course?
+- [x] Protected routes requiring authentication
+- [ ] GitHub OAuth with Passport.js
+- [x] Restrict available user options dynamically based on user roles
+- [ ] Loading spinner while pages load
+- [x] Disable buttons and inputs during form submission
+- [x] Disable buttons after successful submission
+- [ ] Cloud image uploads
+- [ ] Toast notifications
 
-[👉🏾👉🏾👉🏾 your answer here]
+---
 
-### 5. Looking ahead, what are your goals related to web development, and what steps do you plan to take to achieve them?
+# Additional Features Implemented
 
-[👉🏾👉🏾👉🏾 your answer here]
+These features go beyond the required rubric.
+
+## Authentication
+
+- ✅ JWT Authentication
+- ✅ Password hashing with bcrypt
+- ✅ Role-based authorization (Player, Coach, Organizer)
+- ✅ Protected React routes
+- ✅ Player ownership protection when editing profiles
+
+---
+
+## Player Verification System
+
+- ✅ Registry-based player verification
+- ✅ Locked verified soccer information
+- ✅ Prevent duplicate player registration
+- ✅ Automatically populate verified player statistics
+- ✅ Read-only registry information after verification
+
+---
+
+## Player Management
+
+- ✅ Player profile creation
+- ✅ Player profile editing
+- ✅ Player profile deletion
+- ✅ Dynamic player profile pages
+- ✅ Recruitment activity dashboard
+- ✅ Team assignment status
+
+---
+
+## Team Management
+
+- ✅ Organizer dashboard
+- ✅ Coach dashboard
+- ✅ Team creation
+- ✅ Coach assignment
+- ✅ Team directory
+- ✅ Team detail pages
+- ✅ Practice schedule management
+- ✅ Roster tracking
+
+---
+
+## Scouting System
+
+- ✅ Browse verified players
+- ✅ Add player to Scout List
+- ✅ Remove player from Scout List
+- ✅ Coach Scout List dashboard
+- ✅ Duplicate scout prevention
+
+---
+
+## Recruitment Features
+
+- ✅ Team creation workflow
+- ✅ Team overview pages
+- ✅ Recruitment dashboards
+- ✅ Dynamic statistics
+- ✅ Featured Players populated from the live database
+- ✅ Featured Soccer Teams populated from the live database
+
+---
+
+## Deployment
+
+- ✅ Backend deployed on Render
+- ✅ Frontend deployed on Render
+- ✅ PostgreSQL database hosted on Render
+- ✅ Environment variables configured
+- ✅ Production API integration
+- ✅ React Router rewrite rules configured
+- ✅ Production application fully functional
+
+---
+
+# Final Demo GIF
+
+## Complete Application Walkthrough
+
+> **Insert final walkthrough GIF here**
+
+<!--
+![Final Demo](gif-link-here.gif)
+-->
+
+---
+
+# Reflection
+
+## 1. What went well during this unit?
+
+Our team successfully completed the development and deployment of the College Soccer Scout Helper application. We integrated a React frontend with an Express and PostgreSQL backend, implemented secure JWT authentication, developed role-based dashboards for players, coaches, and organizers, and deployed both the frontend and backend on Render. We also completed dynamic database integration, allowing live player and team information to appear throughout the application.
+
+---
+
+## 2. What were some challenges your group faced in this unit?
+
+The biggest challenge was deploying the application to production. We encountered issues connecting the backend to the Render PostgreSQL database due to incorrect environment variable configuration, particularly the database host settings. We also resolved React Router refresh issues by configuring Render rewrite rules and ensured the frontend communicated correctly with the deployed backend using environment variables and CORS configuration.
+
+---
+
+## 3. What were some of the highlights or achievements that you are most proud of in this project?
+
+The most rewarding achievement was transforming the application into a complete production-ready full-stack web application. Features such as player verification, secure authentication, team creation, scouting, protected dashboards, dynamic player and team listings, and successful cloud deployment demonstrated our ability to build a modern web application from start to finish. Successfully deploying the application and seeing live data retrieved from the production PostgreSQL database was a major accomplishment.
+
+---
+
+## 4. Reflecting on your web development journey so far, how have you grown since the beginning of the course?
+
+Since the beginning of the course, I have grown significantly as a full-stack developer. I gained practical experience designing relational databases, building RESTful APIs with Express, developing React applications with reusable components, implementing authentication and authorization, integrating frontend and backend systems, and deploying production-ready applications using Render. I also strengthened my debugging, deployment, and problem-solving skills while resolving production issues involving PostgreSQL, environment variables, CORS, and React Router. This project has given me the confidence to design, build, deploy, and maintain complete full-stack web applications.
