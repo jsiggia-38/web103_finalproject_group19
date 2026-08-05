@@ -777,6 +777,199 @@
 }
 
 /* ===============================
+   Dynamic homepage content
+================================ */
+
+.player-avatar {
+  position: relative;
+  overflow: hidden;
+}
+
+.player-avatar img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center top;
+}
+
+.home-player-verified-badge {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+
+  padding: 7px 11px;
+
+  border: 1px solid
+    rgb(120 220 119 / 42%);
+
+  border-radius: 999px;
+
+  background:
+    rgb(8 31 13 / 92%);
+
+  color: #78dc77;
+
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.player-card-heading h3 span {
+  color: #78dc77;
+}
+
+.team-logo {
+  overflow: hidden;
+}
+
+.team-logo img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+
+  border-radius: 50%;
+}
+
+.home-team-title-row {
+  margin-bottom: 38px;
+
+  align-items: flex-end;
+}
+
+.home-team-title-row h2 {
+  margin: 9px 0 10px;
+
+  color: #ffffff;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(2rem, 4vw, 3rem);
+}
+
+.home-team-title-row p {
+  margin: 0;
+
+  color: #becab9;
+  line-height: 1.7;
+}
+
+.home-featured-error {
+  width: min(
+    calc(100% - 40px),
+    1292px
+  );
+
+  margin: 25px auto;
+  padding: 14px 17px;
+
+  border: 1px solid
+    rgb(255 107 107 / 40%);
+
+  border-radius: 10px;
+
+  background:
+    rgb(147 0 10 / 18%);
+
+  color: #ffb4ab;
+  font-weight: 800;
+}
+
+.home-featured-state {
+  min-height: 260px;
+  padding: 45px 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  border: 1px dashed
+    rgb(120 220 119 / 27%);
+
+  border-radius: 17px;
+
+  background: #1c1b1b;
+
+  text-align: center;
+}
+
+.home-featured-state.dark {
+  background: #201f1f;
+}
+
+.home-featured-state > span {
+  font-size: 3rem;
+}
+
+.home-featured-state h3 {
+  margin: 14px 0 7px;
+
+  color: #ffffff;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+}
+
+.home-featured-state p {
+  margin: 0;
+
+  color: #becab9;
+}
+
+.home-featured-state > a {
+  margin-top: 18px;
+  padding: 12px 21px;
+
+  display: inline-flex;
+
+  border-radius: 999px;
+
+  background: #78dc77;
+  color: #00390a;
+
+  font-weight: 900;
+}
+
+.home-featured-spinner {
+  width: 48px;
+  height: 48px;
+
+  border: 4px solid
+    rgb(120 220 119 / 18%);
+
+  border-top-color: #78dc77;
+  border-radius: 50%;
+
+  animation:
+    home-featured-spin
+    800ms linear infinite;
+}
+
+@keyframes home-featured-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .home-team-title-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* ===============================
    Footer
 ================================ */
 

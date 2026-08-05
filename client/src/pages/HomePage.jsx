@@ -1,61 +1,88 @@
-import { Link } from 'react-router-dom'
-import '../styles/home.css'
+import {
+  useEffect,
+  useState,
+} from "react";
 
-const featuredPlayers = [
-  {
-    id: 1,
-    name: 'Daniel Smith',
-    position: 'Midfielder',
-    classYear: 'Senior',
-    skillLevel: 'Advanced',
-    goals: 8,
-    assists: 10,
-    gamesPlayed: 15
-  },
-  {
-    id: 2,
-    name: 'Kevin Brown',
-    position: 'Forward',
-    classYear: 'Junior',
-    skillLevel: 'Intermediate',
-    goals: 12,
-    assists: 4,
-    gamesPlayed: 13
-  },
-  {
-    id: 3,
-    name: 'Michael Johnson',
-    position: 'Goalkeeper',
-    classYear: 'Senior',
-    skillLevel: 'Advanced',
-    goals: 0,
-    assists: 0,
-    gamesPlayed: 14
-  }
-]
+import {
+  Link,
+} from "react-router-dom";
 
-const featuredTeams = [
-  {
-    id: 1,
-    name: 'Campus United',
-    division: 'Division A',
-    captain: 'Alex Turner'
-  },
-  {
-    id: 2,
-    name: 'Northside FC',
-    division: 'Division B',
-    captain: 'Jason Miller'
-  },
-  {
-    id: 3,
-    name: 'Warriors SC',
-    division: 'Division A',
-    captain: 'Chris Lee'
-  }
-]
+import {
+  getPlayers,
+} from "../services/playerService.js";
+
+import {
+  getAllTeams,
+} from "../services/teamService.js";
+
+import "../styles/home.css";
+
+const DEFAULT_PLAYER_IMAGE =
+  "/images/default-player-avatar.png";
+
+const DEFAULT_TEAM_LOGO =
+  "/images/default-team-logo.png";
 
 function HomePage() {
+  const [featuredPlayers, setFeaturedPlayers] =
+    useState([]);
+
+  const [featuredTeams, setFeaturedTeams] =
+    useState([]);
+
+  const [loadingFeaturedContent, setLoadingFeaturedContent] =
+    useState(true);
+
+  const [featuredContentError, setFeaturedContentError] =
+    useState("");
+
+  useEffect(() => {
+    const loadFeaturedContent = async () => {
+      try {
+        setLoadingFeaturedContent(true);
+        setFeaturedContentError("");
+
+        const [
+          playersResult,
+          teamsResult,
+        ] = await Promise.all([
+          getPlayers({
+            sortBy: "newest",
+            sortOrder: "desc",
+          }),
+          getAllTeams(),
+        ]);
+
+        const registeredPlayers =
+          Array.isArray(playersResult.data)
+            ? playersResult.data
+            : [];
+
+        const registeredTeams =
+          Array.isArray(teamsResult.data)
+            ? teamsResult.data
+            : [];
+
+        setFeaturedPlayers(
+          registeredPlayers.slice(0, 3),
+        );
+
+        setFeaturedTeams(
+          registeredTeams.slice(0, 3),
+        );
+      } catch (requestError) {
+        setFeaturedContentError(
+          requestError.message ||
+            "Unable to load featured players and teams.",
+        );
+      } finally {
+        setLoadingFeaturedContent(false);
+      }
+    };
+
+    loadFeaturedContent();
+  }, []);
+
   return (
     <div className="home-page">
       <header className="home-header">
@@ -69,8 +96,13 @@ function HomePage() {
             </span>
 
             <span>
-              <strong>College Soccer</strong>
-              <small>Scout Helper</small>
+              <strong>
+                College Soccer
+              </strong>
+
+              <small>
+                Scout Helper
+              </small>
             </span>
           </Link>
 
@@ -122,11 +154,11 @@ function HomePage() {
           <div className="home-hero-overlay" />
 
           <div className="home-hero-content">
-           
-
             <h1>
               College Soccer
-              <span> Scout Helper</span>
+              <span>
+                Scout Helper
+              </span>
             </h1>
 
             <h2>
@@ -238,6 +270,15 @@ function HomePage() {
           </div>
         </section>
 
+        {featuredContentError && (
+          <div
+            className="home-featured-error"
+            role="alert"
+          >
+            {featuredContentError}
+          </div>
+        )}
+
         <section className="featured-players-section">
           <div className="home-section-container">
             <div className="section-title-row">
@@ -246,7 +287,9 @@ function HomePage() {
                   Featured Talent
                 </span>
 
-                <h2>Featured Players</h2>
+                <h2>
+                  Featured Players
+                </h2>
               </div>
 
               <Link
@@ -257,111 +300,232 @@ function HomePage() {
               </Link>
             </div>
 
-            <div className="player-card-grid">
-              {featuredPlayers.map((player) => (
-                <article
-                  className="home-player-card"
-                  key={player.id}
-                >
-                  <div className="player-avatar">
-                    <span>⚽</span>
-                  </div>
+            {loadingFeaturedContent ? (
+              <div className="home-featured-state">
+                <div className="home-featured-spinner" />
 
-                  <div className="player-card-content">
-                    <div className="player-card-heading">
-                      <div>
-                        <h3>{player.name}</h3>
+                <h3>
+                  Loading Featured Players
+                </h3>
+              </div>
+            ) : featuredPlayers.length === 0 ? (
+              <div className="home-featured-state">
+                <span>⚽</span>
 
-                        <p>
-                          {player.position} •{' '}
-                          {player.classYear}
-                        </p>
-                      </div>
+                <h3>
+                  No Registered Players Yet
+                </h3>
 
-                      <span className="skill-badge">
-                        {player.skillLevel}
-                      </span>
-                    </div>
+                <p>
+                  Verified player profiles will
+                  appear here after registration.
+                </p>
 
-                    <div className="player-stats-row">
-                      <div>
-                        <strong>
-                          {player.goals}
-                        </strong>
-                        <span>Goals</span>
-                      </div>
-
-                      <div>
-                        <strong>
-                          {player.assists}
-                        </strong>
-                        <span>Assists</span>
-                      </div>
-
-                      <div>
-                        <strong>
-                          {player.gamesPlayed}
-                        </strong>
-                        <span>Games</span>
-                      </div>
-                    </div>
-
-                    <Link
-                      to={`/players/${player.id}`}
-                      className="card-action-button"
+                <Link to="/signup/player-verification">
+                  Create Player Profile
+                </Link>
+              </div>
+            ) : (
+              <div className="player-card-grid">
+                {featuredPlayers.map(
+                  (player) => (
+                    <article
+                      className="home-player-card"
+                      key={player.playerId}
                     >
-                      View Profile
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
+                      <div className="player-avatar">
+                        <img
+                          src={
+                            player.profileImage ||
+                            DEFAULT_PLAYER_IMAGE
+                          }
+                          alt={`${player.firstName} ${player.lastName}`}
+                          onError={(event) => {
+                            event.currentTarget.src =
+                              DEFAULT_PLAYER_IMAGE;
+                          }}
+                        />
+
+                        {player.isVerified && (
+                          <span className="home-player-verified-badge">
+                            ✓ Verified
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="player-card-content">
+                        <div className="player-card-heading">
+                          <div>
+                            <h3>
+                              {player.firstName}{" "}
+                              <span>
+                                {player.lastName}
+                              </span>
+                            </h3>
+
+                            <p>
+                              {
+                                player.primaryPosition
+                              }
+                              {" • "}
+                              {player.classYear}
+                            </p>
+                          </div>
+
+                          <span className="skill-badge">
+                            {player.skillLevel}
+                          </span>
+                        </div>
+
+                        <div className="player-stats-row">
+                          <div>
+                            <strong>
+                              {player.statistics
+                                ?.goals ?? 0}
+                            </strong>
+
+                            <span>Goals</span>
+                          </div>
+
+                          <div>
+                            <strong>
+                              {player.statistics
+                                ?.assists ?? 0}
+                            </strong>
+
+                            <span>Assists</span>
+                          </div>
+
+                          <div>
+                            <strong>
+                              {player.statistics
+                                ?.gamesPlayed ?? 0}
+                            </strong>
+
+                            <span>Games</span>
+                          </div>
+                        </div>
+
+                        <Link
+                          to={`/players/${player.playerId}`}
+                          className="card-action-button"
+                        >
+                          View Profile
+                        </Link>
+                      </div>
+                    </article>
+                  ),
+                )}
+              </div>
+            )}
           </div>
         </section>
 
         <section className="featured-teams-section">
           <div className="home-section-container">
-            <div className="section-heading">
-              <span>Recruiting Teams</span>
+            <div className="section-title-row home-team-title-row">
+              <div>
+                <span className="section-label">
+                  Recruiting Teams
+                </span>
 
-              <h2>Featured Soccer Teams</h2>
+                <h2>
+                  Featured Soccer Teams
+                </h2>
 
-              <p>
-                Discover college clubs and
-                intramural teams looking for new
-                talent.
-              </p>
+                <p>
+                  Discover college clubs and
+                  intramural teams looking for new
+                  talent.
+                </p>
+              </div>
+
+              <Link
+                to="/teams"
+                className="view-all-link"
+              >
+                View All Teams →
+              </Link>
             </div>
 
-            <div className="team-card-grid">
-              {featuredTeams.map((team) => (
-                <article
-                  className="home-team-card"
-                  key={team.id}
-                >
-                  <div className="team-logo">
-                    ⚽
-                  </div>
+            {loadingFeaturedContent ? (
+              <div className="home-featured-state dark">
+                <div className="home-featured-spinner" />
 
-                  <h3>{team.name}</h3>
+                <h3>
+                  Loading Featured Teams
+                </h3>
+              </div>
+            ) : featuredTeams.length === 0 ? (
+              <div className="home-featured-state dark">
+                <span>🛡️</span>
 
-                  <p className="team-division">
-                    {team.division}
-                  </p>
+                <h3>
+                  No Registered Teams Yet
+                </h3>
 
-                  <p className="team-captain">
-                    Captain: {team.captain}
-                  </p>
+                <p>
+                  Teams created by club organizers
+                  will appear here.
+                </p>
 
-                  <Link
-                    to={`/teams/${team.id}`}
-                    className="team-action-button"
-                  >
-                    View Team
-                  </Link>
-                </article>
-              ))}
-            </div>
+                <Link to="/teams">
+                  Browse Teams
+                </Link>
+              </div>
+            ) : (
+              <div className="team-card-grid">
+                {featuredTeams.map(
+                  (team) => (
+                    <article
+                      className="home-team-card"
+                      key={team.teamId}
+                    >
+                      <div className="team-logo">
+                        {team.logoUrl ? (
+                          <img
+                            src={team.logoUrl}
+                            alt={`${team.teamName} logo`}
+                            onError={(event) => {
+                              event.currentTarget.src =
+                                DEFAULT_TEAM_LOGO;
+                            }}
+                          />
+                        ) : (
+                          <img
+                            src={DEFAULT_TEAM_LOGO}
+                            alt=""
+                          />
+                        )}
+                      </div>
+
+                      <h3>
+                        {team.teamName}
+                      </h3>
+
+                      <p className="team-division">
+                        {team.division ||
+                          "College Soccer Team"}
+                      </p>
+
+                      <p className="team-captain">
+                        Captain:{" "}
+                        {team.captain
+                          ? `${team.captain.firstName} ${team.captain.lastName}`
+                          : "Not assigned"}
+                      </p>
+
+                      <Link
+                        to={`/teams/${team.teamId}`}
+                        className="team-action-button"
+                      >
+                        View Team
+                      </Link>
+                    </article>
+                  ),
+                )}
+              </div>
+            )}
           </div>
         </section>
       </main>
@@ -396,7 +560,9 @@ function HomePage() {
           </div>
 
           <div className="footer-signup">
-            <h4>Ready to Get Started?</h4>
+            <h4>
+              Ready to Get Started?
+            </h4>
 
             <p>
               Create your profile and begin your
@@ -418,7 +584,7 @@ function HomePage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
