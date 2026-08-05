@@ -180,6 +180,7 @@ These features go beyond the required rubric.
 # Final Demo GIF
 
 ## Complete Application Walkthrough
+https://college-soccer-scout-helper.onrender.com/
 
 > **Insert final walkthrough GIF here**
 
