@@ -59,7 +59,10 @@ The backend includes a database reset feature that restores the application to i
 
 Modern landing page introducing the platform and highlighting featured players, featured teams, and the player recruitment process.
 
-homepage.gif
+<img src="./client/public/images/Homepage%20.gif"
+     alt="Homepage Demo"
+     width="900">
+
 
 
 
