@@ -132,11 +132,11 @@ Verified football information remains locked to preserve data integrity, while p
 
 Players can be searched, filtered, and sorted by:
 
-Position
-Skill Level
-Availability
-Class Year
-Goals
+- Position
+- Skill Level
+- Availability
+- Class Year
+- Goals
 Assists
 
 <img src="./client/public/images/Browse%20feature.gif"
