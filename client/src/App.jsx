@@ -20,6 +20,7 @@ import CreateTeamPage from "./pages/CreateTeamPage.jsx";
 import ScoutListPage from "./pages/ScoutListPage.jsx";
 import TeamsPage from "./pages/TeamsPage.jsx";
 import TeamDetailsPage from "./pages/TeamDetailsPage.jsx";
+import AIAssistantPage from "./pages/AIAssistantPage.jsx";
 
 
 function App() {
@@ -30,6 +31,11 @@ function App() {
           path="/"
           element={<HomePage />}
         />
+
+        <Route
+  path="/ai-assistant"
+  element={<AIAssistantPage />}
+/>
 
         <Route
           path="/signup/player-verification"
